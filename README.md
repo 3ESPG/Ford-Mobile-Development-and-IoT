@@ -17,6 +17,8 @@
 
 ---
 
+<div align="center">
+
 ## 👨‍💻 Integrantes
 
 | Nome | RM |
@@ -29,6 +31,8 @@
 **Instituição:** FIAP — Faculdade de Informática e Administração Paulista
 **Curso:** Análise e Desenvolvimento de Sistemas
 **Disciplina:** Mobile Development and IoT
+
+</div>
 
 ---
 
