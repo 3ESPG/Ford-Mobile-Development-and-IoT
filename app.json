@@ -1,0 +1,31 @@
+{
+  "expo": {
+    "name": "Ford Service Pulse",
+    "slug": "ford-service-pulse",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "fordservicepulse",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "br.com.fiap.fordservicepulse"
+    },
+    "android": {
+      "package": "br.com.fiap.fordservicepulse",
+      "adaptiveIcon": {
+        "backgroundColor": "#0A3A7A"
+      }
+    },
+    "web": {
+      "bundler": "metro",
+      "output": "single"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "experiments": {
+      "typedRoutes": true
+    }
+  }
+}
