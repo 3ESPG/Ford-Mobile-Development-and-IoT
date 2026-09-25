@@ -1,26 +1,19 @@
-import Constants from "expo-constants";
-import { router } from "expo-router";
 import { useState } from "react";
 import { Platform, StyleSheet, View } from "react-native";
 import { getHealth } from "@/api/client";
-import { AppText, Badge, Banner, Button, Card, colors, IconTile, MetricRow, Screen, Section, spacing, TextField, useToast } from "@/design-system";
+import { AppText, Badge, Banner, Button, Card, colors, MetricRow, Screen, Section, spacing, TextField, useToast } from "@/design-system";
 import { shortDate } from "@/domain/format";
 import { useApp } from "@/state/AppProvider";
-
-const TEAM = [
-  ["Felipe Braunstein e Silva", "RM554483"],
-  ["Felipe do Nascimento Fernandes", "RM554598"],
-  ["Henrique Ignacio Bartalo", "RM555274"],
-  ["Gustavo Henrique Martins", "RM556956"]
-];
+import { useAuth } from "@/state/AuthProvider";
+import { AccessDenied } from "@/ui/AccessDenied";
 
 export default function SettingsScreen() {
-  const { settings, updateSettings, signOut, source, syncError, syncing, sync, snapshot, crm, resetLocalData } = useApp();
+  const { can } = useAuth();
+  const { settings, updateSettings, source, syncError, syncing, sync, snapshot, crm, resetLocalData } = useApp();
   const toast = useToast();
   const [apiUrl, setApiUrl] = useState(settings.apiUrl);
   const [testing, setTesting] = useState(false);
   const [confirmReset, setConfirmReset] = useState(false);
-  const profile = settings.profile;
 
   const saveApi = async () => {
     const value = apiUrl.trim();
@@ -51,27 +44,10 @@ export default function SettingsScreen() {
     toast.show({ title: "Dados locais apagados", tone: "warning" });
   };
 
-  return (
-    <Screen back eyebrow="Conta e dados" title="Ajustes">
-      <Card style={styles.row}>
-        <IconTile name="person" tone="brand" size="lg" />
-        <View style={{ flex: 1, gap: 2 }}>
-          <AppText variant="titleM">{profile?.name}</AppText>
-          <AppText variant="caption" color={colors.textMuted}>
-            {profile?.role === "gestor" ? "Gestor Ford · visão da rede" : `Consultor de serviço · Dealer ${profile?.dealerCode}`}
-          </AppText>
-        </View>
-        <Button
-          label="Trocar"
-          size="sm"
-          variant="secondary"
-          onPress={async () => {
-            await signOut();
-            router.replace("/welcome");
-          }}
-        />
-      </Card>
+  if (!can("data.manage")) return <AccessDenied title="Dados" back message="Somente administradores alteram a fonte de dados." />;
 
+  return (
+    <Screen back eyebrow="Administração" title="Dados e sincronização">
       <Section title="Fonte de dados" subtitle="O app é offline-first: sem API, usa a base embarcada">
         <Card>
           <View style={styles.between}>
@@ -97,26 +73,12 @@ export default function SettingsScreen() {
           <MetricRow label="Leads com status" value={String(Object.keys(crm.statuses).length)} />
           <MetricRow label="Contatos registrados" value={String(crm.interactions.length)} />
           <MetricRow label="Agendamentos" value={String(crm.appointments.length)} />
-          <MetricRow label="Alertas IoT" value={String(crm.alerts.length)} last />
+          <MetricRow label="Alertas IoT" value={String(crm.alerts.length)} />
+          <MetricRow label="Lembretes" value={String(crm.reminders.length)} last />
           <Button label={confirmReset ? "Toque de novo para confirmar" : "Apagar dados locais"} icon="trash-outline" variant="danger" size="sm" onPress={reset} />
         </Card>
       </Section>
 
-      <Section title="Sobre">
-        <Card>
-          <MetricRow label="Aplicativo" value={`Ford Service Pulse v${Constants.expoConfig?.version || "1.0.0"}`} />
-          <MetricRow label="Desafio" value="Ford × FIAP · Desafio 2 (VIN Share)" />
-          <MetricRow label="Stack" value="Expo SDK 54 · React Native · Expo Router · SQLite · Sensors" last />
-        </Card>
-        <Card>
-          <AppText variant="overline" color={colors.textMuted}>
-            Equipe
-          </AppText>
-          {TEAM.map(([name, rm], i) => (
-            <MetricRow key={rm} label={name} value={rm} last={i === TEAM.length - 1} />
-          ))}
-        </Card>
-      </Section>
     </Screen>
   );
 }

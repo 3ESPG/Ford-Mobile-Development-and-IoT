@@ -1,12 +1,16 @@
 import type { ReactNode } from "react";
 import { StyleSheet, View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { colors, elevation, spacing } from "@/design-system";
+import { colors, Container, elevation, spacing } from "@/design-system";
 
 /** Barra de ações fixa no rodapé das telas de detalhe */
 export function StickyFooter({ children }: { children: ReactNode }) {
   const insets = useSafeAreaInsets();
-  return <View style={[styles.bar, elevation.md, { paddingBottom: Math.max(insets.bottom, spacing.md) }]}>{children}</View>;
+  return (
+    <View style={[styles.bar, elevation.md, { paddingBottom: Math.max(insets.bottom, spacing.md) }]}>
+      <Container style={styles.row}>{children}</Container>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -18,9 +22,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.surface,
     borderTopWidth: 1,
     borderTopColor: colors.border,
-    paddingTop: spacing.md,
-    paddingHorizontal: spacing.lg,
-    flexDirection: "row",
-    gap: spacing.sm
-  }
+    paddingTop: spacing.md
+  },
+  row: { flexDirection: "row", gap: spacing.sm }
 });

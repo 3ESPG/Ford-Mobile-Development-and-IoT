@@ -1,4 +1,6 @@
+import axios from "axios";
 import Constants from "expo-constants";
+import { http } from "./http";
 import type { Snapshot } from "@/domain/types";
 import type { TelemetryFrame } from "@/domain/telemetry";
 
@@ -18,6 +20,21 @@ export class ApiError extends Error {
 
 const clean = (base: string) => base.trim().replace(/\/+$/, "");
 
+/** Requisições de dados (snapshot/health) passam pelo axios autenticado: Bearer + logout em 401 */
+async function authed<T>(base: string, path: string, timeoutMs: number): Promise<T> {
+  if (!base) throw new ApiError("API não configurada");
+  try {
+    const { data } = await http.get<T>(`${clean(base)}${path}`, { timeout: timeoutMs });
+    return data;
+  } catch (err) {
+    if (axios.isAxiosError(err)) {
+      if (err.response) throw new ApiError(`API respondeu ${err.response.status}`, err.response.status);
+      if (err.code === "ECONNABORTED") throw new ApiError("Tempo de resposta esgotado");
+    }
+    throw new ApiError("Servidor inacessível");
+  }
+}
+
 async function request<T>(base: string, path: string, timeoutMs = 4000): Promise<T> {
   if (!base) throw new ApiError("API não configurada");
   const controller = new AbortController();
@@ -36,11 +53,11 @@ async function request<T>(base: string, path: string, timeoutMs = 4000): Promise
 }
 
 export function getHealth(base: string) {
-  return request<{ ok: boolean; generatedAt: string }>(base, "/health", 3000);
+  return authed<{ ok: boolean; generatedAt: string }>(base, "/health", 3000);
 }
 
 export function getSnapshot(base: string) {
-  return request<Snapshot>(base, "/api/snapshot", 6000);
+  return authed<Snapshot>(base, "/api/snapshot", 6000);
 }
 
 export function getTelemetry(base: string, vin: string, scenario: string) {

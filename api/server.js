@@ -7,9 +7,12 @@
  *   GET  /api/overview | /api/dealers | /api/leads | /api/models | /api/strategy
  *   GET  /api/vehicles/:vin/telemetry       → leitura IoT (modo HTTP polling)
  *   POST /api/vehicles/:vin/faults          → injeta código de falha (atuação remota)
+ *   POST /auth/login                        → JWT (HS256) para os usuários de teste
+ *   GET  /auth/me                           → usuário do token (401 sem token válido)
  * WebSocket:
  *   ws://HOST:3333/ws/telemetry?vin=...&scenario=...  → stream IoT (1 leitura/s)
  */
+const crypto = require("crypto");
 const http = require("http");
 const fs = require("fs");
 const path = require("path");
@@ -28,7 +31,7 @@ function loadData() {
 
 const CORS = {
   "Access-Control-Allow-Origin": "*",
-  "Access-Control-Allow-Headers": "Content-Type",
+  "Access-Control-Allow-Headers": "Content-Type, Authorization",
   "Access-Control-Allow-Methods": "GET, POST, OPTIONS"
 };
 
@@ -77,6 +80,53 @@ function readBody(req) {
 }
 
 // ---------------------------------------------------------------------------
+// Autenticação (JWT HS256) — mesmos usuários de teste do modo demo do app
+// ---------------------------------------------------------------------------
+const JWT_SECRET = process.env.JWT_SECRET || "ford-service-pulse-dev-secret";
+const TOKEN_HOURS = 8;
+const USERS = [
+  { id: "u-admin", nome: "Ana Ribeiro", email: "admin@ford.com", role: "ADMIN", dealerCode: null },
+  { id: "u-gestor", nome: "Carlos Mendes", email: "gestor@ford.com", role: "GESTOR_CONCESSIONARIA", dealerCode: "4192" },
+  { id: "u-consultor", nome: "Juliana Costa", email: "consultor@ford.com", role: "CONSULTOR", dealerCode: "4146" }
+];
+const PASSWORD = process.env.DEMO_PASSWORD || "ford@2026";
+const APP_ROLE = { ADMIN: "admin", GESTOR_CONCESSIONARIA: "gestor", CONSULTOR: "consultor" };
+
+const b64url = (value) => Buffer.from(value).toString("base64url");
+const sign = (data) => crypto.createHmac("sha256", JWT_SECRET).update(data).digest("base64url");
+
+function issueToken(user) {
+  const head = b64url(JSON.stringify({ alg: "HS256", typ: "JWT" }));
+  const payload = b64url(
+    JSON.stringify({
+      sub: user.id,
+      name: user.nome,
+      email: user.email,
+      role: APP_ROLE[user.role],
+      dealerCode: user.dealerCode,
+      exp: Math.floor(Date.now() / 1000) + TOKEN_HOURS * 3600
+    })
+  );
+  return `${head}.${payload}.${sign(`${head}.${payload}`)}`;
+}
+
+/** Valida assinatura e expiração; devolve o payload ou null */
+function verifyToken(token) {
+  const [head, payload, signature] = String(token || "").split(".");
+  if (!head || !payload || !signature) return null;
+  const expected = sign(`${head}.${payload}`);
+  if (signature.length !== expected.length || !crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expected))) return null;
+  try {
+    const data = JSON.parse(Buffer.from(payload, "base64url").toString("utf8"));
+    return data.exp * 1000 > Date.now() ? data : null;
+  } catch {
+    return null;
+  }
+}
+
+const bearer = (req) => (req.headers.authorization || "").replace(/^Bearer\s+/i, "");
+
+// ---------------------------------------------------------------------------
 // Estado de telemetria por VIN
 // ---------------------------------------------------------------------------
 const vehicles = new Map();
@@ -111,6 +161,27 @@ async function route(req, res) {
 
   if (req.method === "GET" && p === "/health") {
     return send(res, 200, { ok: true, source: data.meta.source, generatedAt: data.meta.generatedAt, vehiclesOnline: vehicles.size });
+  }
+
+  if (req.method === "POST" && p === "/auth/login") {
+    const body = await readBody(req);
+    const email = String(body?.email || "").trim().toLowerCase();
+    const password = String(body?.senha || body?.password || "");
+    if (!email || !password) return sendError(res, 400, "INVALID_BODY", "Informe e-mail e senha");
+    const user = USERS.find((u) => u.email === email);
+    if (!user || password !== PASSWORD) return sendError(res, 401, "INVALID_CREDENTIALS", "E-mail ou senha incorretos");
+    return send(res, 200, { token: issueToken(user), user });
+  }
+
+  if (req.method === "GET" && p === "/auth/me") {
+    const payload = verifyToken(bearer(req));
+    if (!payload) return sendError(res, 401, "UNAUTHORIZED", "Token ausente, inválido ou expirado");
+    return send(res, 200, USERS.find((u) => u.id === payload.sub));
+  }
+
+  // Rotas de dados: se o app enviar um token, ele precisa ser válido (senão 401 → logout no app)
+  if (p.startsWith("/api/") && req.headers.authorization && !verifyToken(bearer(req))) {
+    return sendError(res, 401, "INVALID_TOKEN", "Sessão inválida ou expirada");
   }
 
   if (req.method === "GET" && p === "/api/snapshot") {
