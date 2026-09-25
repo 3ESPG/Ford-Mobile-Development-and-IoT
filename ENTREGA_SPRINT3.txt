@@ -1,6 +1,6 @@
 FORD x FIAP — SPRINT 3 — MOBILE DEVELOPMENT & IoT
 Desafio 2: Impulsionando o VIN Share na América do Sul
-App: Ford Service Pulse
+App: Ford Service Pulse · versão 1.4.0
 
 INTEGRANTES
 - Felipe Braunstein e Silva — RM554483
@@ -16,3 +16,10 @@ COLE_AQUI_O_LINK_DO_APK
 
 VÍDEO DE DEMONSTRAÇÃO (YouTube, não listado)
 COLE_AQUI_O_LINK_DO_VIDEO
+
+USUÁRIOS DE TESTE (senha de todos: ford@2026)
+- admin@ford.com      → ADMIN (rede toda + dados e sincronização)
+- gestor@ford.com     → GESTOR_CONCESSIONARIA (Dealer 4192, painel completo)
+- consultor@ford.com  → CONSULTOR (Dealer 4146, painel resumido)
+
+O app funciona sem API (modo demo). Instalação e build: README.md, seção 5.
