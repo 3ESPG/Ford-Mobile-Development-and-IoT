@@ -168,6 +168,23 @@ export type Appointment = {
   date: string; // YYYY-MM-DD
   slot: string; // HH:mm
   status: AppointmentStatus;
+  note: string;
+  /** id da notificação local de lembrete (expo-notifications) */
+  reminderId: string | null;
+  createdAt: string;
+};
+
+export type ReminderKind = "revisao" | "agendamento";
+
+/** Lembrete de serviço agendado como notificação local */
+export type Reminder = {
+  id: number;
+  customerId: string;
+  kind: ReminderKind;
+  title: string;
+  body: string;
+  fireAt: string; // ISO
+  notificationId: string | null;
   createdAt: string;
 };
 
@@ -185,10 +202,12 @@ export type IotAlert = {
   acknowledged: boolean;
 };
 
-export type UserRole = "consultor" | "gestor";
+export type UserRole = "admin" | "gestor" | "consultor";
 
 export type Profile = {
+  id: string;
   name: string;
+  email: string;
   role: UserRole;
   dealerCode: string | null;
 };
@@ -196,7 +215,6 @@ export type Profile = {
 export type TelemetryMode = "simulado" | "http" | "websocket";
 
 export type AppSettings = {
-  profile: Profile | null;
   apiUrl: string;
   telemetryMode: TelemetryMode;
 };

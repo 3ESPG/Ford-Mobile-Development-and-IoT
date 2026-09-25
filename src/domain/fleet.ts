@@ -4,14 +4,15 @@ import type { Lead } from "./types";
 export type ConnectedVehicle = { lead: Lead; scenario: Scenario };
 
 /**
- * "Frota conectada" da demonstração: um veículo por modelo entre os leads,
- * cada um com um cenário de telemetria diferente.
+ * "Frota conectada" da demonstração: um veículo por modelo entre os leads
+ * (ou os primeiros veículos da loja, com uniqueModels = false), cada um com
+ * um cenário de telemetria diferente.
  */
-export function connectedFleet(leads: Lead[], size = 5): ConnectedVehicle[] {
+export function connectedFleet(leads: Lead[], size = 5, uniqueModels = true): ConnectedVehicle[] {
   const seen = new Set<string>();
   const picked: Lead[] = [];
   for (const lead of leads) {
-    if (!seen.has(lead.modelName)) {
+    if (!uniqueModels || !seen.has(lead.modelName)) {
       seen.add(lead.modelName);
       picked.push(lead);
     }

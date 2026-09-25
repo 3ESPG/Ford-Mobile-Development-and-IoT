@@ -1,6 +1,6 @@
 import { useMemo, useState } from "react";
 import { FlatList, StyleSheet, View } from "react-native";
-import { AppText, Chip, ChipRow, colors, EmptyState, Hero, SearchField, SegmentedControl, spacing } from "@/design-system";
+import { AppText, Chip, ChipRow, colors, Container, EmptyState, Hero, LoadingState, SearchField, spacing } from "@/design-system";
 import { LEAD_STATUS, matchesQuery, sortQueue, STATUS_ORDER } from "@/domain/leads";
 import type { Lead, LeadStatus } from "@/domain/types";
 import { useApp } from "@/state/AppProvider";
@@ -12,13 +12,11 @@ type PriorityFilter = "all" | Lead["priority"];
 type StatusFilter = "all" | LeadStatus;
 
 export default function LeadsScreen() {
-  const { settings } = useApp();
-  const isConsultant = settings.profile?.role === "consultor";
-  const [scope, setScope] = useState<"mine" | "all">(isConsultant ? "mine" : "all");
+  const { syncing } = useApp();
   const [query, setQuery] = useState("");
   const [priority, setPriority] = useState<PriorityFilter>("all");
   const [status, setStatus] = useState<StatusFilter>("all");
-  const { items, label } = useScopedLeads(scope);
+  const { items, label } = useScopedLeads();
 
   const counts = useMemo(() => funnelCounts(items), [items]);
   const iotCount = items.filter((l) => l.iotAlert).length;
@@ -41,20 +39,8 @@ export default function LeadsScreen() {
         subtitle="Ordenada por alertas IoT e score de risco de evasão. Toque para ver o motivo e agir."
         right={<ProfileButton />}
         overlap={spacing.xl}
-      >
-        {isConsultant ? (
-          <SegmentedControl
-            inverse
-            value={scope}
-            onChange={setScope}
-            options={[
-              { value: "mine", label: "Minha loja" },
-              { value: "all", label: "Rede toda" }
-            ]}
-          />
-        ) : null}
-      </Hero>
-      <View style={styles.controls}>
+      />
+      <Container style={styles.controls}>
         <SearchField value={query} onChangeText={setQuery} placeholder="Buscar modelo, VIN, dealer ou motivo" />
         <ChipRow>
           <Chip label="Todas" selected={priority === "all"} onPress={() => setPriority("all")} />
@@ -70,23 +56,28 @@ export default function LeadsScreen() {
         <AppText variant="caption" color={colors.textMuted}>
           {filtered.length} resultado(s){iotCount ? ` · ${iotCount} com alerta de veículo conectado` : ""}
         </AppText>
-      </View>
+      </Container>
     </View>
   );
 
   return (
     <FlatList
       style={styles.root}
-      data={filtered}
+      data={syncing ? [] : filtered}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <View style={styles.item}>
+        <Container>
           <LeadCard lead={item} />
-        </View>
+        </Container>
       )}
       ListHeaderComponent={header}
       ListEmptyComponent={
-        <View style={styles.item}>
+        <Container>
+          {syncing ? (
+            <LoadingState rows={4} />
+          ) : items.length === 0 ? (
+            <EmptyState title="Sem leads na sua carteira" message="Nenhum cliente da sua concessionária está em risco agora." />
+          ) : (
           <EmptyState
             title="Nenhum lead encontrado"
             message="Ajuste a busca ou os filtros para ver outros clientes."
@@ -97,7 +88,8 @@ export default function LeadsScreen() {
               setStatus("all");
             }}
           />
-        </View>
+          )}
+        </Container>
       }
       contentContainerStyle={styles.list}
       keyboardShouldPersistTaps="handled"
@@ -110,6 +102,5 @@ export default function LeadsScreen() {
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.background },
   list: { paddingBottom: 120, gap: spacing.md },
-  controls: { paddingHorizontal: spacing.lg, marginTop: -spacing.xl, gap: spacing.md, marginBottom: spacing.xs },
-  item: { paddingHorizontal: spacing.lg }
+  controls: { marginTop: -spacing.xl, gap: spacing.md, marginBottom: spacing.xs },
 });

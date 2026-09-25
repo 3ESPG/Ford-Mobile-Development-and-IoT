@@ -4,11 +4,13 @@ import { AppText, Badge, Card, colors, EmptyState, KpiGrid, KpiTile, MetricRow, 
 import { compactNumber, km, number, percent, shortDate, titleCase } from "@/domain/format";
 import { sortQueue } from "@/domain/leads";
 import { useApp } from "@/state/AppProvider";
+import { useAuth } from "@/state/AuthProvider";
 import { LeadCard } from "@/ui/LeadCard";
 
 export default function DealerScreen() {
   const { code } = useLocalSearchParams<{ code: string }>();
   const { snapshot, leads } = useApp();
+  const { user, can } = useAuth();
   const dealer = snapshot.dealers.find((d) => d.dealerCode === String(code));
 
   if (!dealer) {
@@ -92,7 +94,9 @@ export default function DealerScreen() {
       ) : null}
 
       <Section title="Leads priorizados desta loja" subtitle={`${number(dealerLeads.length)} na amostra do app`}>
-        {dealerLeads.length ? (
+        {!can("network.allLeads") && user?.dealerCode !== dealer.dealerCode ? (
+          <EmptyState icon="lock-closed-outline" title="Leads de outra concessionária" message="Por privacidade, você vê apenas os indicadores desta loja. Os clientes ficam visíveis só para a própria concessionária." />
+        ) : dealerLeads.length ? (
           dealerLeads.map((l) => <LeadCard key={l.id} lead={l} />)
         ) : (
           <EmptyState title="Sem leads na amostra" message="A amostra do app traz os 160 leads de maior score da rede." />
