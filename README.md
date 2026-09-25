@@ -185,7 +185,7 @@ Na sprint de IA, a equipe classifica os clientes nesses 4 perfis com um modelo *
 
 | | |
 |---|---|
-| **Download do APK** | **👉 `COLE_AQUI_O_LINK_DO_APK`** (GitHub Releases) |
+| **Download do APK** | **👉 [ford-service-pulse-v1.4.0.apk](https://github.com/3ESPG/Ford-Mobile-Development-and-IoT/releases/download/v1.4.0/ford-service-pulse-v1.4.0.apk)** ([Releases](https://github.com/3ESPG/Ford-Mobile-Development-and-IoT/releases/tag/v1.4.0)) |
 | Pacote Android | `br.com.fiap.fordservicepulse` |
 | Versão | 1.4.0 (versionCode 4) |
 | Requisitos | Android 7.0+ · funciona **sem internet** (modo demo + base embarcada + SQLite) |
@@ -204,7 +204,7 @@ Na sprint de IA, a equipe classifica os clientes nesses 4 perfis com um modelo *
 ```bash
 npm install
 npm install -g eas-cli
-eas login                         # conta Expo do grupo (owner: fbraunstein)
+eas login                         # conta Expo do projeto (owner: felipe3103)
 eas build:configure               # só na primeira vez (o projeto já tem eas.json e projectId)
 eas build -p android --profile preview   # = npm run build:apk
 ```

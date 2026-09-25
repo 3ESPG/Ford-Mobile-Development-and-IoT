@@ -12,7 +12,7 @@ REPOSITÓRIO (público)
 https://github.com/3ESPG/Ford-Mobile-Development-and-IoT
 
 APK (download)
-COLE_AQUI_O_LINK_DO_APK
+https://github.com/3ESPG/Ford-Mobile-Development-and-IoT/releases/download/v1.4.0/ford-service-pulse-v1.4.0.apk
 
 VÍDEO DE DEMONSTRAÇÃO (YouTube, não listado)
 COLE_AQUI_O_LINK_DO_VIDEO
