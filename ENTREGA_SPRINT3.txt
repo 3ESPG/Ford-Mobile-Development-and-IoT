@@ -1,0 +1,18 @@
+FORD x FIAP — SPRINT 3 — MOBILE DEVELOPMENT & IoT
+Desafio 2: Impulsionando o VIN Share na América do Sul
+App: Ford Service Pulse
+
+INTEGRANTES
+- Felipe Braunstein e Silva — RM554483
+- Felipe do Nascimento Fernandes — RM554598
+- Henrique Ignacio Bartalo — RM555274
+- Gustavo Henrique Martins — RM556956
+
+REPOSITÓRIO (público)
+https://github.com/3ESPG/Ford-Mobile-Development-and-IoT
+
+APK (download)
+COLE_AQUI_O_LINK_DO_APK
+
+VÍDEO DE DEMONSTRAÇÃO (YouTube, não listado)
+COLE_AQUI_O_LINK_DO_VIDEO

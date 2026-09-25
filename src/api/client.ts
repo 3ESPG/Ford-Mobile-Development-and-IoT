@@ -1,45 +1,61 @@
 import Constants from "expo-constants";
-import { Platform } from "react-native";
-import type { Dealer, Lead, OverviewResponse, Paginated, StrategyResponse } from "@/types";
+import type { Snapshot } from "@/domain/types";
+import type { TelemetryFrame } from "@/domain/telemetry";
 
-const configuredUrl =
-  process.env.EXPO_PUBLIC_API_URL ||
-  (Constants.expoConfig?.extra as { apiUrl?: string } | undefined)?.apiUrl;
+/**
+ * URL padrão da API (opcional). O app funciona 100% offline com a base embarcada;
+ * a API é usada para sincronizar dados e para os modos IoT HTTP/WebSocket.
+ * Pode ser definida em build (EXPO_PUBLIC_API_URL) ou em Ajustes, no próprio app.
+ */
+export const DEFAULT_API_URL: string =
+  process.env.EXPO_PUBLIC_API_URL || (Constants.expoConfig?.extra as { apiUrl?: string } | undefined)?.apiUrl || "";
 
-export const API_BASE_URL =
-  configuredUrl || (Platform.OS === "android" ? "http://10.0.2.2:3333" : "http://localhost:3333");
-
-async function request<T>(path: string): Promise<T> {
-  const response = await fetch(`${API_BASE_URL}${path}`);
-  if (!response.ok) {
-    throw new Error(`API ${response.status}: ${path}`);
+export class ApiError extends Error {
+  constructor(message: string, public status?: number) {
+    super(message);
   }
-  return response.json() as Promise<T>;
 }
 
-function query(params: Record<string, string | number | undefined>) {
-  const search = new URLSearchParams();
-  Object.entries(params).forEach(([key, value]) => {
-    if (value !== undefined && value !== "") {
-      search.set(key, String(value));
-    }
+const clean = (base: string) => base.trim().replace(/\/+$/, "");
+
+async function request<T>(base: string, path: string, timeoutMs = 4000): Promise<T> {
+  if (!base) throw new ApiError("API não configurada");
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(`${clean(base)}${path}`, { signal: controller.signal, headers: { Accept: "application/json" } });
+    if (!response.ok) throw new ApiError(`API respondeu ${response.status}`, response.status);
+    return (await response.json()) as T;
+  } catch (err) {
+    if (err instanceof ApiError) throw err;
+    if ((err as Error)?.name === "AbortError") throw new ApiError("Tempo de resposta esgotado");
+    throw new ApiError("Servidor inacessível");
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
+export function getHealth(base: string) {
+  return request<{ ok: boolean; generatedAt: string }>(base, "/health", 3000);
+}
+
+export function getSnapshot(base: string) {
+  return request<Snapshot>(base, "/api/snapshot", 6000);
+}
+
+export function getTelemetry(base: string, vin: string, scenario: string) {
+  return request<TelemetryFrame>(base, `/api/vehicles/${encodeURIComponent(vin)}/telemetry?scenario=${scenario}`, 2500);
+}
+
+export function telemetrySocketUrl(base: string, vin: string, scenario: string) {
+  return `${clean(base).replace(/^http/, "ws")}/ws/telemetry?vin=${encodeURIComponent(vin)}&scenario=${scenario}`;
+}
+
+export async function postFault(base: string, vin: string, code: string) {
+  const response = await fetch(`${clean(base)}/api/vehicles/${encodeURIComponent(vin)}/faults`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ code })
   });
-  const value = search.toString();
-  return value ? `?${value}` : "";
-}
-
-export function getOverview() {
-  return request<OverviewResponse>("/api/overview");
-}
-
-export function getDealers(params: { q?: string; sort?: string }) {
-  return request<Paginated<Dealer>>(`/api/dealers${query({ ...params, limit: 80 })}`);
-}
-
-export function getLeads(params: { q?: string; priority?: string }) {
-  return request<Paginated<Lead>>(`/api/leads${query({ ...params, limit: 80 })}`);
-}
-
-export function getStrategy() {
-  return request<StrategyResponse>("/api/strategy");
+  if (!response.ok) throw new ApiError(`API respondeu ${response.status}`, response.status);
 }

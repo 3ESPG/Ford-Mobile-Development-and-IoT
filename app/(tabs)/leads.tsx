@@ -1,156 +1,115 @@
-import { useCallback, useEffect, useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { Screen } from "@/components/Screen";
-import { Section } from "@/components/Section";
-import { SearchBox } from "@/components/SearchBox";
-import { Chip } from "@/components/Chip";
-import { ErrorState, LoadingState } from "@/components/StateView";
-import { Badge, Card, CardHeader, MetricLine } from "@/components/ListCards";
-import { getLeads } from "@/api/client";
-import { colors, radii, spacing } from "@/theme";
-import type { Lead, Paginated } from "@/types";
-import { number, shortDate } from "@/utils";
+import { useMemo, useState } from "react";
+import { FlatList, StyleSheet, View } from "react-native";
+import { AppText, Chip, ChipRow, colors, EmptyState, Hero, SearchField, SegmentedControl, spacing } from "@/design-system";
+import { LEAD_STATUS, matchesQuery, sortQueue, STATUS_ORDER } from "@/domain/leads";
+import type { Lead, LeadStatus } from "@/domain/types";
+import { useApp } from "@/state/AppProvider";
+import { funnelCounts, useScopedLeads } from "@/state/selectors";
+import { LeadCard } from "@/ui/LeadCard";
+import { ProfileButton } from "@/ui/ProfileButton";
 
-type PriorityFilter = "" | "Alta" | "Media";
-
-function badgeTone(priority: Lead["priority"]) {
-  if (priority === "Alta") {
-    return "red" as const;
-  }
-  if (priority === "Media") {
-    return "amber" as const;
-  }
-  return "blue" as const;
-}
+type PriorityFilter = "all" | Lead["priority"];
+type StatusFilter = "all" | LeadStatus;
 
 export default function LeadsScreen() {
+  const { settings } = useApp();
+  const isConsultant = settings.profile?.role === "consultor";
+  const [scope, setScope] = useState<"mine" | "all">(isConsultant ? "mine" : "all");
   const [query, setQuery] = useState("");
-  const [priority, setPriority] = useState<PriorityFilter>("");
-  const [data, setData] = useState<Paginated<Lead> | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | undefined>();
+  const [priority, setPriority] = useState<PriorityFilter>("all");
+  const [status, setStatus] = useState<StatusFilter>("all");
+  const { items, label } = useScopedLeads(scope);
 
-  const load = useCallback(async () => {
-    try {
-      setError(undefined);
-      const response = await getLeads({ q: query, priority });
-      setData(response);
-    } catch (err) {
-      setError(err instanceof Error ? err.message : "Falha ao carregar");
-    } finally {
-      setLoading(false);
-    }
-  }, [query, priority]);
+  const counts = useMemo(() => funnelCounts(items), [items]);
+  const iotCount = items.filter((l) => l.iotAlert).length;
 
-  useEffect(() => {
-    const timeout = setTimeout(load, 250);
-    return () => clearTimeout(timeout);
-  }, [load]);
+  const filtered = useMemo(
+    () =>
+      sortQueue(
+        items.filter(
+          (l) => matchesQuery(l, query) && (priority === "all" || l.priority === priority) && (status === "all" || l.status === status)
+        )
+      ),
+    [items, query, priority, status]
+  );
+
+  const header = (
+    <View>
+      <Hero
+        eyebrow={label}
+        title="Fila de leads"
+        subtitle="Ordenada por alertas IoT e score de risco de evasão. Toque para ver o motivo e agir."
+        right={<ProfileButton />}
+        overlap={spacing.xl}
+      >
+        {isConsultant ? (
+          <SegmentedControl
+            inverse
+            value={scope}
+            onChange={setScope}
+            options={[
+              { value: "mine", label: "Minha loja" },
+              { value: "all", label: "Rede toda" }
+            ]}
+          />
+        ) : null}
+      </Hero>
+      <View style={styles.controls}>
+        <SearchField value={query} onChangeText={setQuery} placeholder="Buscar modelo, VIN, dealer ou motivo" />
+        <ChipRow>
+          <Chip label="Todas" selected={priority === "all"} onPress={() => setPriority("all")} />
+          <Chip label="Alta" icon="flame-outline" selected={priority === "Alta"} onPress={() => setPriority("Alta")} />
+          <Chip label="Média" selected={priority === "Media"} onPress={() => setPriority("Media")} />
+        </ChipRow>
+        <ChipRow>
+          <Chip label="Todos status" count={items.length} selected={status === "all"} onPress={() => setStatus("all")} />
+          {STATUS_ORDER.map((s) => (
+            <Chip key={s} label={LEAD_STATUS[s].label} count={counts[s]} selected={status === s} onPress={() => setStatus(s)} />
+          ))}
+        </ChipRow>
+        <AppText variant="caption" color={colors.textMuted}>
+          {filtered.length} resultado(s){iotCount ? ` · ${iotCount} com alerta de veículo conectado` : ""}
+        </AppText>
+      </View>
+    </View>
+  );
 
   return (
-    <Screen title="Leads de serviço" subtitle="Priorização por recência, KM, garantia, agenda e histórico">
-      <SearchBox value={query} onChangeText={setQuery} placeholder="Buscar modelo, dealer ou motivo" />
-      <View style={styles.filters}>
-        <Chip label="Todos" selected={priority === ""} onPress={() => setPriority("")} />
-        <Chip label="Alta" selected={priority === "Alta"} onPress={() => setPriority("Alta")} />
-        <Chip label="Média" selected={priority === "Media"} onPress={() => setPriority("Media")} />
-      </View>
-
-      {loading && !data ? <LoadingState /> : null}
-      {!loading && !data ? <ErrorState message={error} onRetry={load} /> : null}
-
-      {data ? (
-        <Section title={`${number(data.total)} leads`}>
-          {data.items.map((item) => (
-            <Card key={item.id}>
-              <CardHeader
-                icon="radio-outline"
-                title={`${item.modelName} ${item.modelYear || ""}`.trim()}
-                subtitle={`VIN ${item.vinMask} • Dealer ${item.dealerCode}`}
-                right={<Badge label={`${item.priority} ${item.score}`} tone={badgeTone(item.priority)} />}
-              />
-              <View style={styles.signalBox}>
-                <Text style={styles.signalTitle}>Sinal conectado</Text>
-                <View style={styles.signalGrid}>
-                  <View style={styles.signalItem}>
-                    <Text style={styles.signalValue}>{number(item.lastKm)}</Text>
-                    <Text style={styles.signalLabel}>KM atual</Text>
-                  </View>
-                  <View style={styles.signalItem}>
-                    <Text style={styles.signalValue}>{number(item.estimatedKmPerYear)}</Text>
-                    <Text style={styles.signalLabel}>KM/ano</Text>
-                  </View>
-                  <View style={styles.signalItem}>
-                    <Text style={styles.signalValue}>{item.daysSinceService}</Text>
-                    <Text style={styles.signalLabel}>dias sem OS</Text>
-                  </View>
-                </View>
-              </View>
-              <MetricLine label="Último serviço" value={shortDate(item.lastServiceDate)} />
-              <MetricLine label="Próxima janela" value={shortDate(item.nextDueDate)} />
-              <MetricLine label="Histórico" value={`${item.serviceCount} serviços`} />
-              <MetricLine label="Motivo" value={item.reason} />
-              <View style={styles.action}>
-                <Text style={styles.actionLabel}>Ação recomendada</Text>
-                <Text style={styles.actionText}>{item.recommendedAction}</Text>
-              </View>
-            </Card>
-          ))}
-        </Section>
-      ) : null}
-    </Screen>
+    <FlatList
+      style={styles.root}
+      data={filtered}
+      keyExtractor={(item) => item.id}
+      renderItem={({ item }) => (
+        <View style={styles.item}>
+          <LeadCard lead={item} />
+        </View>
+      )}
+      ListHeaderComponent={header}
+      ListEmptyComponent={
+        <View style={styles.item}>
+          <EmptyState
+            title="Nenhum lead encontrado"
+            message="Ajuste a busca ou os filtros para ver outros clientes."
+            actionLabel="Limpar filtros"
+            onAction={() => {
+              setQuery("");
+              setPriority("all");
+              setStatus("all");
+            }}
+          />
+        </View>
+      }
+      contentContainerStyle={styles.list}
+      keyboardShouldPersistTaps="handled"
+      initialNumToRender={8}
+      showsVerticalScrollIndicator={false}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  filters: {
-    flexDirection: "row",
-    gap: spacing.sm
-  },
-  signalBox: {
-    borderRadius: radii.md,
-    backgroundColor: colors.surfaceAlt,
-    borderWidth: 1,
-    borderColor: colors.line,
-    padding: spacing.md,
-    gap: spacing.sm
-  },
-  signalTitle: {
-    color: colors.ink,
-    fontSize: 13,
-    fontWeight: "900"
-  },
-  signalGrid: {
-    flexDirection: "row",
-    gap: spacing.sm
-  },
-  signalItem: {
-    flex: 1,
-    minHeight: 64,
-    justifyContent: "center"
-  },
-  signalValue: {
-    color: colors.fordBlue,
-    fontSize: 18,
-    fontWeight: "900"
-  },
-  signalLabel: {
-    color: colors.muted,
-    fontSize: 11,
-    lineHeight: 15
-  },
-  action: {
-    gap: spacing.xs
-  },
-  actionLabel: {
-    color: colors.muted,
-    fontSize: 12,
-    fontWeight: "800"
-  },
-  actionText: {
-    color: colors.ink,
-    fontSize: 14,
-    lineHeight: 20,
-    fontWeight: "700"
-  }
+  root: { flex: 1, backgroundColor: colors.background },
+  list: { paddingBottom: 120, gap: spacing.md },
+  controls: { paddingHorizontal: spacing.lg, marginTop: -spacing.xl, gap: spacing.md, marginBottom: spacing.xs },
+  item: { paddingHorizontal: spacing.lg }
 });

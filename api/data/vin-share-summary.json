@@ -7,7 +7,7 @@
       "start": "2020-01-03",
       "end": "2026-05-04"
     },
-    "methodology": "Service Share estimado = VINs unicos com servico pago nos ultimos 12 meses / VINs unicos observados na base."
+    "methodology": "Service Share estimado = VINs únicos com serviço pago nos últimos 12 meses / VINs únicos observados na base."
   },
   "overview": {
     "serviceShare": 51.0,
@@ -113,17 +113,17 @@
     ],
     "segments": [
       {
-        "label": "Risco de evasao",
+        "label": "Risco de evasão",
         "count": 85985,
         "share": 49.0
       },
       {
-        "label": "Clientes fieis",
+        "label": "Clientes fiéis",
         "count": 43775,
         "share": 24.9
       },
       {
-        "label": "Primeira manutencao",
+        "label": "Primeira manutenção",
         "count": 27046,
         "share": 15.4
       },
@@ -1611,8 +1611,8 @@
       "warrantyEndDate": "2025-11-29",
       "priority": "Alta",
       "score": 93,
-      "reason": "1147 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "1147 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "15325EC44E6D",
@@ -1629,8 +1629,8 @@
       "warrantyEndDate": "2025-12-05",
       "priority": "Alta",
       "score": 93,
-      "reason": "1131 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "1131 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "A042C807521F",
@@ -1647,8 +1647,8 @@
       "warrantyEndDate": "2025-12-22",
       "priority": "Alta",
       "score": 93,
-      "reason": "1103 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "1103 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "037539E87178",
@@ -1665,8 +1665,8 @@
       "warrantyEndDate": "2026-01-30",
       "priority": "Alta",
       "score": 93,
-      "reason": "1097 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "1097 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "A71B18D238A4",
@@ -1683,8 +1683,8 @@
       "warrantyEndDate": "2026-01-29",
       "priority": "Alta",
       "score": 93,
-      "reason": "1076 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "1076 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "692B6DB40A66",
@@ -1701,8 +1701,8 @@
       "warrantyEndDate": "2026-04-03",
       "priority": "Alta",
       "score": 93,
-      "reason": "1027 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "1027 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "942D1587DC85",
@@ -1719,8 +1719,8 @@
       "warrantyEndDate": "2025-12-26",
       "priority": "Alta",
       "score": 93,
-      "reason": "1019 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "1019 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "FE6D9FBE525C",
@@ -1737,8 +1737,8 @@
       "warrantyEndDate": "2025-12-19",
       "priority": "Alta",
       "score": 93,
-      "reason": "1008 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "1008 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "3743AE86F3A9",
@@ -1755,8 +1755,8 @@
       "warrantyEndDate": "2025-12-27",
       "priority": "Alta",
       "score": 93,
-      "reason": "969 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "969 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "C1A3E3FCE8E4",
@@ -1773,8 +1773,8 @@
       "warrantyEndDate": "2026-04-24",
       "priority": "Alta",
       "score": 93,
-      "reason": "920 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "920 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "CD9FF5FDE4A5",
@@ -1791,8 +1791,8 @@
       "warrantyEndDate": "2026-06-29",
       "priority": "Alta",
       "score": 93,
-      "reason": "900 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "900 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "78A14EA2D4DB",
@@ -1809,8 +1809,8 @@
       "warrantyEndDate": "2026-04-24",
       "priority": "Alta",
       "score": 93,
-      "reason": "893 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "893 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "87C7D447BE82",
@@ -1827,8 +1827,8 @@
       "warrantyEndDate": "2026-05-30",
       "priority": "Alta",
       "score": 93,
-      "reason": "879 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "879 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "46DCA113FC6A",
@@ -1845,8 +1845,8 @@
       "warrantyEndDate": "2026-08-24",
       "priority": "Alta",
       "score": 93,
-      "reason": "874 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "874 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "BE41B3B7F641",
@@ -1863,8 +1863,8 @@
       "warrantyEndDate": "2025-12-01",
       "priority": "Alta",
       "score": 93,
-      "reason": "851 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "851 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "12946DF59DC9",
@@ -1881,8 +1881,8 @@
       "warrantyEndDate": "2026-08-23",
       "priority": "Alta",
       "score": 93,
-      "reason": "811 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "811 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "EA1D02A60F40",
@@ -1899,8 +1899,8 @@
       "warrantyEndDate": "2026-08-22",
       "priority": "Alta",
       "score": 93,
-      "reason": "809 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "809 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "859D45FBE8B0",
@@ -1917,8 +1917,8 @@
       "warrantyEndDate": "2026-06-06",
       "priority": "Alta",
       "score": 93,
-      "reason": "804 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "804 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "A68D04820CAE",
@@ -1935,8 +1935,8 @@
       "warrantyEndDate": "2026-04-23",
       "priority": "Alta",
       "score": 93,
-      "reason": "783 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "783 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "9B0DF8B495D5",
@@ -1953,8 +1953,8 @@
       "warrantyEndDate": "2026-06-29",
       "priority": "Alta",
       "score": 93,
-      "reason": "767 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "767 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "95C6C2E35F33",
@@ -1971,8 +1971,8 @@
       "warrantyEndDate": "2023-01-08",
       "priority": "Alta",
       "score": 87,
-      "reason": "2303 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2303 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "6A78730E23F9",
@@ -1989,8 +1989,8 @@
       "warrantyEndDate": "2023-01-21",
       "priority": "Alta",
       "score": 87,
-      "reason": "2292 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2292 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "2D0642C674F0",
@@ -2007,8 +2007,8 @@
       "warrantyEndDate": "2023-01-22",
       "priority": "Alta",
       "score": 87,
-      "reason": "2286 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2286 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "5F707BBAF74F",
@@ -2025,8 +2025,8 @@
       "warrantyEndDate": "2023-01-16",
       "priority": "Alta",
       "score": 87,
-      "reason": "2284 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2284 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "DB428D154AAF",
@@ -2043,8 +2043,8 @@
       "warrantyEndDate": "2023-01-13",
       "priority": "Alta",
       "score": 87,
-      "reason": "2270 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2270 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "602CEFB3F4D2",
@@ -2061,8 +2061,8 @@
       "warrantyEndDate": "2023-01-05",
       "priority": "Alta",
       "score": 87,
-      "reason": "2267 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2267 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "34558B4F7075",
@@ -2079,8 +2079,8 @@
       "warrantyEndDate": "2023-01-14",
       "priority": "Alta",
       "score": 87,
-      "reason": "2263 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2263 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "1F8E4C35822B",
@@ -2097,8 +2097,8 @@
       "warrantyEndDate": "2023-01-15",
       "priority": "Alta",
       "score": 87,
-      "reason": "2261 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2261 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "9DD7BD964120",
@@ -2115,8 +2115,8 @@
       "warrantyEndDate": "2023-01-15",
       "priority": "Alta",
       "score": 87,
-      "reason": "2259 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2259 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "83DD0057332B",
@@ -2133,8 +2133,8 @@
       "warrantyEndDate": "2023-01-12",
       "priority": "Alta",
       "score": 87,
-      "reason": "2257 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2257 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "16EE7A257B84",
@@ -2151,8 +2151,8 @@
       "warrantyEndDate": "2023-01-22",
       "priority": "Alta",
       "score": 87,
-      "reason": "2254 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2254 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "5F35E6B91DCC",
@@ -2169,8 +2169,8 @@
       "warrantyEndDate": "2023-01-22",
       "priority": "Alta",
       "score": 87,
-      "reason": "2254 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2254 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "86185E2145A2",
@@ -2187,8 +2187,8 @@
       "warrantyEndDate": "2023-01-09",
       "priority": "Alta",
       "score": 87,
-      "reason": "2252 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2252 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "167960F7461F",
@@ -2205,8 +2205,8 @@
       "warrantyEndDate": "2023-01-06",
       "priority": "Alta",
       "score": 87,
-      "reason": "2251 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2251 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "0352FCB3504F",
@@ -2223,8 +2223,8 @@
       "warrantyEndDate": "2023-02-18",
       "priority": "Alta",
       "score": 87,
-      "reason": "2251 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2251 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "C10318A8DBB8",
@@ -2241,8 +2241,8 @@
       "warrantyEndDate": "2023-01-13",
       "priority": "Alta",
       "score": 87,
-      "reason": "2250 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2250 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "414FB37E5F95",
@@ -2259,8 +2259,8 @@
       "warrantyEndDate": "2023-01-12",
       "priority": "Alta",
       "score": 87,
-      "reason": "2247 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2247 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "96B7ECF97487",
@@ -2277,8 +2277,8 @@
       "warrantyEndDate": "2023-01-23",
       "priority": "Alta",
       "score": 87,
-      "reason": "2245 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2245 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "AADDA676D523",
@@ -2295,8 +2295,8 @@
       "warrantyEndDate": "2023-01-14",
       "priority": "Alta",
       "score": 87,
-      "reason": "2245 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2245 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "B9065B36C1D2",
@@ -2313,8 +2313,8 @@
       "warrantyEndDate": "2023-01-15",
       "priority": "Alta",
       "score": 87,
-      "reason": "2244 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2244 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "A59492BBF854",
@@ -2331,8 +2331,8 @@
       "warrantyEndDate": "2023-01-15",
       "priority": "Alta",
       "score": 87,
-      "reason": "2244 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2244 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "2B7BB48B3157",
@@ -2349,8 +2349,8 @@
       "warrantyEndDate": "2023-01-15",
       "priority": "Alta",
       "score": 87,
-      "reason": "2244 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2244 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "E30E16F35110",
@@ -2367,8 +2367,8 @@
       "warrantyEndDate": "2023-01-14",
       "priority": "Alta",
       "score": 87,
-      "reason": "2240 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2240 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "90CE78B73B72",
@@ -2385,8 +2385,8 @@
       "warrantyEndDate": "2023-01-20",
       "priority": "Alta",
       "score": 87,
-      "reason": "2240 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2240 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "E5E2ABDDA826",
@@ -2403,8 +2403,8 @@
       "warrantyEndDate": "2023-01-08",
       "priority": "Alta",
       "score": 87,
-      "reason": "2240 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2240 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "73E15BFB7736",
@@ -2421,8 +2421,8 @@
       "warrantyEndDate": "2023-01-12",
       "priority": "Alta",
       "score": 87,
-      "reason": "2238 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2238 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "28A84A7E8729",
@@ -2439,8 +2439,8 @@
       "warrantyEndDate": "2023-01-20",
       "priority": "Alta",
       "score": 87,
-      "reason": "2238 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2238 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "6A31E6BF2882",
@@ -2457,8 +2457,8 @@
       "warrantyEndDate": "2023-01-28",
       "priority": "Alta",
       "score": 87,
-      "reason": "2238 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2238 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "ED3A31C6EFAB",
@@ -2475,8 +2475,8 @@
       "warrantyEndDate": "2023-01-23",
       "priority": "Alta",
       "score": 87,
-      "reason": "2237 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2237 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "14A1F3B662CF",
@@ -2493,8 +2493,8 @@
       "warrantyEndDate": "2023-01-07",
       "priority": "Alta",
       "score": 87,
-      "reason": "2235 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2235 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "19F567B3E54C",
@@ -2511,8 +2511,8 @@
       "warrantyEndDate": "2023-01-23",
       "priority": "Alta",
       "score": 87,
-      "reason": "2232 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2232 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "A52B7C53494D",
@@ -2529,8 +2529,8 @@
       "warrantyEndDate": "2023-01-14",
       "priority": "Alta",
       "score": 87,
-      "reason": "2230 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2230 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "C7CB143BC8A9",
@@ -2547,8 +2547,8 @@
       "warrantyEndDate": "2023-01-08",
       "priority": "Alta",
       "score": 87,
-      "reason": "2225 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2225 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "99BAF0F3FDBC",
@@ -2565,8 +2565,8 @@
       "warrantyEndDate": "2023-02-04",
       "priority": "Alta",
       "score": 87,
-      "reason": "2225 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2225 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "58FD0A3ECBC1",
@@ -2583,8 +2583,8 @@
       "warrantyEndDate": "2023-02-02",
       "priority": "Alta",
       "score": 87,
-      "reason": "2224 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2224 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "0E9ED3CB226F",
@@ -2601,8 +2601,8 @@
       "warrantyEndDate": "2023-02-03",
       "priority": "Alta",
       "score": 87,
-      "reason": "2224 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2224 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "656F8CF4B78E",
@@ -2619,8 +2619,8 @@
       "warrantyEndDate": "2023-01-14",
       "priority": "Alta",
       "score": 87,
-      "reason": "2224 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2224 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "E9F71CD9CF8F",
@@ -2637,8 +2637,8 @@
       "warrantyEndDate": "2023-03-03",
       "priority": "Alta",
       "score": 87,
-      "reason": "2222 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2222 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "1A725E92AFFC",
@@ -2655,8 +2655,8 @@
       "warrantyEndDate": "2023-01-15",
       "priority": "Alta",
       "score": 87,
-      "reason": "2218 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2218 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "3130D5EA5BD4",
@@ -2673,8 +2673,8 @@
       "warrantyEndDate": "2023-01-30",
       "priority": "Alta",
       "score": 87,
-      "reason": "2218 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2218 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "66DC301DDA64",
@@ -2691,8 +2691,8 @@
       "warrantyEndDate": "2023-01-28",
       "priority": "Alta",
       "score": 87,
-      "reason": "2217 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2217 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "EC11E832C894",
@@ -2709,8 +2709,8 @@
       "warrantyEndDate": "2023-01-06",
       "priority": "Alta",
       "score": 87,
-      "reason": "2217 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2217 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "7AA67BCBD53C",
@@ -2727,8 +2727,8 @@
       "warrantyEndDate": "2023-01-07",
       "priority": "Alta",
       "score": 87,
-      "reason": "2217 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2217 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "19BE0858509B",
@@ -2745,8 +2745,8 @@
       "warrantyEndDate": "2023-01-22",
       "priority": "Alta",
       "score": 87,
-      "reason": "2214 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2214 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "8DE5B5936D06",
@@ -2763,8 +2763,8 @@
       "warrantyEndDate": "2023-01-30",
       "priority": "Alta",
       "score": 87,
-      "reason": "2212 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2212 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "18DE820D8F17",
@@ -2781,8 +2781,8 @@
       "warrantyEndDate": "2023-01-07",
       "priority": "Alta",
       "score": 87,
-      "reason": "2212 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2212 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "596B426ED660",
@@ -2799,8 +2799,8 @@
       "warrantyEndDate": "2023-01-05",
       "priority": "Alta",
       "score": 87,
-      "reason": "2211 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2211 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "17D045C852B9",
@@ -2817,8 +2817,8 @@
       "warrantyEndDate": "2023-01-20",
       "priority": "Alta",
       "score": 87,
-      "reason": "2210 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2210 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "4FDE1400C486",
@@ -2835,8 +2835,8 @@
       "warrantyEndDate": "2023-02-04",
       "priority": "Alta",
       "score": 87,
-      "reason": "2210 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2210 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "2DE023D76206",
@@ -2853,8 +2853,8 @@
       "warrantyEndDate": "2023-03-09",
       "priority": "Alta",
       "score": 87,
-      "reason": "2209 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2209 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "1384C23164B1",
@@ -2871,8 +2871,8 @@
       "warrantyEndDate": "2023-01-09",
       "priority": "Alta",
       "score": 87,
-      "reason": "2208 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2208 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "87E32BB99667",
@@ -2889,8 +2889,8 @@
       "warrantyEndDate": "2023-02-04",
       "priority": "Alta",
       "score": 87,
-      "reason": "2208 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2208 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "9AF6E35FED1C",
@@ -2907,8 +2907,8 @@
       "warrantyEndDate": "2023-01-14",
       "priority": "Alta",
       "score": 87,
-      "reason": "2208 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2208 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "A81E063620B6",
@@ -2925,8 +2925,8 @@
       "warrantyEndDate": "2023-01-21",
       "priority": "Alta",
       "score": 87,
-      "reason": "2208 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2208 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "3F998233E621",
@@ -2943,8 +2943,8 @@
       "warrantyEndDate": "2023-01-02",
       "priority": "Alta",
       "score": 87,
-      "reason": "2205 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2205 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "46C601F4FF61",
@@ -2961,8 +2961,8 @@
       "warrantyEndDate": "2023-01-21",
       "priority": "Alta",
       "score": 87,
-      "reason": "2205 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2205 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "E1F81BA71F63",
@@ -2979,8 +2979,8 @@
       "warrantyEndDate": "2023-01-23",
       "priority": "Alta",
       "score": 87,
-      "reason": "2205 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2205 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "F9D6717B8DFD",
@@ -2997,8 +2997,8 @@
       "warrantyEndDate": "2023-01-07",
       "priority": "Alta",
       "score": 87,
-      "reason": "2203 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2203 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "729F81ED828F",
@@ -3015,8 +3015,8 @@
       "warrantyEndDate": "2023-02-02",
       "priority": "Alta",
       "score": 87,
-      "reason": "2203 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2203 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "0535D98CF43F",
@@ -3033,8 +3033,8 @@
       "warrantyEndDate": "2023-02-02",
       "priority": "Alta",
       "score": 87,
-      "reason": "2203 dias sem servico, baixo historico na rede, sem agendamento digital",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2203 dias sem serviço, baixo histórico na rede, sem agendamento digital",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "1A5A1ABE08FE",
@@ -3051,8 +3051,8 @@
       "warrantyEndDate": "2023-01-15",
       "priority": "Media",
       "score": 69,
-      "reason": "2135 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2135 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "7E99FFA5242E",
@@ -3069,8 +3069,8 @@
       "warrantyEndDate": "2023-02-13",
       "priority": "Media",
       "score": 69,
-      "reason": "2134 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2134 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "5E9BA44E25DB",
@@ -3087,8 +3087,8 @@
       "warrantyEndDate": "2023-03-06",
       "priority": "Media",
       "score": 69,
-      "reason": "2134 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2134 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "9C468A195015",
@@ -3105,8 +3105,8 @@
       "warrantyEndDate": "2023-01-16",
       "priority": "Media",
       "score": 69,
-      "reason": "2133 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2133 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "269548497F5F",
@@ -3123,8 +3123,8 @@
       "warrantyEndDate": "2023-02-19",
       "priority": "Media",
       "score": 69,
-      "reason": "2131 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2131 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "6B0C635E7FAB",
@@ -3141,8 +3141,8 @@
       "warrantyEndDate": "2023-01-22",
       "priority": "Media",
       "score": 69,
-      "reason": "2127 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2127 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "6F9C8902036F",
@@ -3159,8 +3159,8 @@
       "warrantyEndDate": "2023-01-14",
       "priority": "Media",
       "score": 69,
-      "reason": "2127 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2127 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "2B0577C0B2BB",
@@ -3177,8 +3177,8 @@
       "warrantyEndDate": "2023-02-11",
       "priority": "Media",
       "score": 69,
-      "reason": "2127 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2127 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "41D10B6CB18B",
@@ -3195,8 +3195,8 @@
       "warrantyEndDate": "2023-02-11",
       "priority": "Media",
       "score": 69,
-      "reason": "2127 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2127 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "D68A5A0F3013",
@@ -3213,8 +3213,8 @@
       "warrantyEndDate": "2023-03-03",
       "priority": "Media",
       "score": 69,
-      "reason": "2126 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2126 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "1065B841C021",
@@ -3231,8 +3231,8 @@
       "warrantyEndDate": "2023-02-19",
       "priority": "Media",
       "score": 69,
-      "reason": "2124 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2124 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "693415BE2CDE",
@@ -3249,8 +3249,8 @@
       "warrantyEndDate": "2023-02-09",
       "priority": "Media",
       "score": 69,
-      "reason": "2124 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2124 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "8515E17F6A96",
@@ -3267,8 +3267,8 @@
       "warrantyEndDate": "2023-01-28",
       "priority": "Media",
       "score": 69,
-      "reason": "2120 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2120 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "09D1319145F9",
@@ -3285,8 +3285,8 @@
       "warrantyEndDate": "2023-01-06",
       "priority": "Media",
       "score": 69,
-      "reason": "2117 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2117 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "F116B3FEB6A8",
@@ -3303,8 +3303,8 @@
       "warrantyEndDate": "2023-01-05",
       "priority": "Media",
       "score": 69,
-      "reason": "2117 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2117 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "BF779296586D",
@@ -3321,8 +3321,8 @@
       "warrantyEndDate": "2023-04-30",
       "priority": "Media",
       "score": 69,
-      "reason": "2113 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2113 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "BAC6E0032A5C",
@@ -3339,8 +3339,8 @@
       "warrantyEndDate": "2023-01-09",
       "priority": "Media",
       "score": 69,
-      "reason": "2112 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2112 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "EE175D4DD204",
@@ -3357,8 +3357,8 @@
       "warrantyEndDate": "2023-02-02",
       "priority": "Media",
       "score": 69,
-      "reason": "2112 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2112 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "7911EBCED947",
@@ -3375,8 +3375,8 @@
       "warrantyEndDate": "2023-01-20",
       "priority": "Media",
       "score": 69,
-      "reason": "2112 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2112 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "0216EC30158B",
@@ -3393,8 +3393,8 @@
       "warrantyEndDate": "2023-03-04",
       "priority": "Media",
       "score": 69,
-      "reason": "2111 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2111 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "B1A80DD95A9A",
@@ -3411,8 +3411,8 @@
       "warrantyEndDate": "2023-03-04",
       "priority": "Media",
       "score": 69,
-      "reason": "2110 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2110 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "7D3F56068363",
@@ -3429,8 +3429,8 @@
       "warrantyEndDate": "2023-02-04",
       "priority": "Media",
       "score": 69,
-      "reason": "2107 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2107 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "CA49AAC0164A",
@@ -3447,8 +3447,8 @@
       "warrantyEndDate": "2023-03-04",
       "priority": "Media",
       "score": 69,
-      "reason": "2107 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2107 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "CFEFFB012D7C",
@@ -3465,8 +3465,8 @@
       "warrantyEndDate": "2023-02-09",
       "priority": "Media",
       "score": 69,
-      "reason": "2106 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2106 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "1C9A28E5A38E",
@@ -3483,8 +3483,8 @@
       "warrantyEndDate": "2023-01-29",
       "priority": "Media",
       "score": 69,
-      "reason": "2105 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2105 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "07E70C3FEAE0",
@@ -3501,8 +3501,8 @@
       "warrantyEndDate": "2023-02-13",
       "priority": "Media",
       "score": 69,
-      "reason": "2103 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2103 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "09431F4569C0",
@@ -3519,8 +3519,8 @@
       "warrantyEndDate": "2023-01-21",
       "priority": "Media",
       "score": 69,
-      "reason": "2098 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2098 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "E4915F0F1ED6",
@@ -3537,8 +3537,8 @@
       "warrantyEndDate": "2023-02-03",
       "priority": "Media",
       "score": 69,
-      "reason": "2098 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2098 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "EF1BD5A52A29",
@@ -3555,8 +3555,8 @@
       "warrantyEndDate": "2023-03-03",
       "priority": "Media",
       "score": 69,
-      "reason": "2098 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2098 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "EB7729D4B748",
@@ -3573,8 +3573,8 @@
       "warrantyEndDate": "2023-03-13",
       "priority": "Media",
       "score": 69,
-      "reason": "2097 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2097 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "A910F7995989",
@@ -3591,8 +3591,8 @@
       "warrantyEndDate": "2023-01-30",
       "priority": "Media",
       "score": 69,
-      "reason": "2096 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2096 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "75F0E7FEC567",
@@ -3609,8 +3609,8 @@
       "warrantyEndDate": "2023-01-15",
       "priority": "Media",
       "score": 69,
-      "reason": "2093 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2093 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "EB4FFF3684D4",
@@ -3627,8 +3627,8 @@
       "warrantyEndDate": "2023-03-17",
       "priority": "Media",
       "score": 69,
-      "reason": "2092 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2092 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "2BBA7CE2015E",
@@ -3645,8 +3645,8 @@
       "warrantyEndDate": "2023-02-10",
       "priority": "Media",
       "score": 69,
-      "reason": "2091 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2091 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "3A148A94FC65",
@@ -3663,8 +3663,8 @@
       "warrantyEndDate": "2023-03-19",
       "priority": "Media",
       "score": 69,
-      "reason": "2091 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2091 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "7EC2AA5125B5",
@@ -3681,8 +3681,8 @@
       "warrantyEndDate": "2023-01-14",
       "priority": "Media",
       "score": 69,
-      "reason": "2090 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2090 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "73A69A8063D6",
@@ -3699,8 +3699,8 @@
       "warrantyEndDate": "2023-03-03",
       "priority": "Media",
       "score": 69,
-      "reason": "2090 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2090 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "9B4D1405938E",
@@ -3717,8 +3717,8 @@
       "warrantyEndDate": "2023-03-16",
       "priority": "Media",
       "score": 69,
-      "reason": "2090 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2090 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "FEE7E3AB0662",
@@ -3735,8 +3735,8 @@
       "warrantyEndDate": "2023-02-12",
       "priority": "Media",
       "score": 69,
-      "reason": "2089 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2089 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "2862FBA23E87",
@@ -3753,8 +3753,8 @@
       "warrantyEndDate": "2023-03-06",
       "priority": "Media",
       "score": 69,
-      "reason": "2089 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2089 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "4EB678EB99E4",
@@ -3771,8 +3771,8 @@
       "warrantyEndDate": "2023-02-18",
       "priority": "Media",
       "score": 69,
-      "reason": "2085 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2085 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "7DA95FE3B9FD",
@@ -3789,8 +3789,8 @@
       "warrantyEndDate": "2023-02-17",
       "priority": "Media",
       "score": 69,
-      "reason": "2084 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2084 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "96CE3D4A8320",
@@ -3807,8 +3807,8 @@
       "warrantyEndDate": "2023-01-26",
       "priority": "Media",
       "score": 69,
-      "reason": "2083 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2083 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "FC4A326A7D56",
@@ -3825,8 +3825,8 @@
       "warrantyEndDate": "2023-02-13",
       "priority": "Media",
       "score": 69,
-      "reason": "2083 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2083 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "4EC2C09223E1",
@@ -3843,8 +3843,8 @@
       "warrantyEndDate": "2023-01-22",
       "priority": "Media",
       "score": 69,
-      "reason": "2083 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2083 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "91B352D9FB9E",
@@ -3861,8 +3861,8 @@
       "warrantyEndDate": "2023-03-31",
       "priority": "Media",
       "score": 69,
-      "reason": "2083 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2083 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "7D2FA5DEA593",
@@ -3879,8 +3879,8 @@
       "warrantyEndDate": "2023-01-30",
       "priority": "Media",
       "score": 69,
-      "reason": "2083 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2083 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "C978EE9DA450",
@@ -3897,8 +3897,8 @@
       "warrantyEndDate": "2023-02-11",
       "priority": "Media",
       "score": 69,
-      "reason": "2082 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2082 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "0C399BA18999",
@@ -3915,8 +3915,8 @@
       "warrantyEndDate": "2023-02-12",
       "priority": "Media",
       "score": 69,
-      "reason": "2082 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2082 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "AED14BEC9665",
@@ -3933,8 +3933,8 @@
       "warrantyEndDate": "2023-01-12",
       "priority": "Media",
       "score": 69,
-      "reason": "2082 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2082 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "AD228B8E698F",
@@ -3951,8 +3951,8 @@
       "warrantyEndDate": "2023-03-03",
       "priority": "Media",
       "score": 69,
-      "reason": "2082 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2082 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "B4D03E9536F6",
@@ -3969,8 +3969,8 @@
       "warrantyEndDate": "2023-01-22",
       "priority": "Media",
       "score": 69,
-      "reason": "2081 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2081 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "E26A2FDBC350",
@@ -3987,8 +3987,8 @@
       "warrantyEndDate": "2023-03-12",
       "priority": "Media",
       "score": 69,
-      "reason": "2079 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2079 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "91973988A292",
@@ -4005,8 +4005,8 @@
       "warrantyEndDate": "2023-03-18",
       "priority": "Media",
       "score": 69,
-      "reason": "2079 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2079 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "8F7E21341FA2",
@@ -4023,8 +4023,8 @@
       "warrantyEndDate": "2023-02-06",
       "priority": "Media",
       "score": 69,
-      "reason": "2078 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2078 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "A587D3BDF2E6",
@@ -4041,8 +4041,8 @@
       "warrantyEndDate": "2023-03-09",
       "priority": "Media",
       "score": 69,
-      "reason": "2077 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2077 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "6C57EE951551",
@@ -4059,8 +4059,8 @@
       "warrantyEndDate": "2023-01-29",
       "priority": "Media",
       "score": 69,
-      "reason": "2077 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2077 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "D59953D93A37",
@@ -4077,8 +4077,8 @@
       "warrantyEndDate": "2023-02-04",
       "priority": "Media",
       "score": 69,
-      "reason": "2077 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2077 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "F2EAAC070CF7",
@@ -4095,8 +4095,8 @@
       "warrantyEndDate": "2023-01-16",
       "priority": "Media",
       "score": 69,
-      "reason": "2077 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2077 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "A19B22A6F293",
@@ -4113,8 +4113,8 @@
       "warrantyEndDate": "2023-06-29",
       "priority": "Media",
       "score": 69,
-      "reason": "2076 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2076 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "E5B7332D9F81",
@@ -4131,8 +4131,8 @@
       "warrantyEndDate": "2023-06-16",
       "priority": "Media",
       "score": 69,
-      "reason": "2071 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2071 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "001A1E50D561",
@@ -4149,8 +4149,8 @@
       "warrantyEndDate": "2023-04-30",
       "priority": "Media",
       "score": 69,
-      "reason": "2071 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2071 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "4CD81E3028FE",
@@ -4167,8 +4167,8 @@
       "warrantyEndDate": "2023-02-17",
       "priority": "Media",
       "score": 69,
-      "reason": "2071 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2071 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "F3E330C4403E",
@@ -4185,8 +4185,8 @@
       "warrantyEndDate": "2023-03-07",
       "priority": "Media",
       "score": 69,
-      "reason": "2071 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2071 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "02156B6EB007",
@@ -4203,8 +4203,8 @@
       "warrantyEndDate": "2023-02-10",
       "priority": "Media",
       "score": 69,
-      "reason": "2069 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2069 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "360C58652B8D",
@@ -4221,8 +4221,8 @@
       "warrantyEndDate": "2023-02-13",
       "priority": "Media",
       "score": 69,
-      "reason": "2069 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2069 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "1AFA1287FC5B",
@@ -4239,8 +4239,8 @@
       "warrantyEndDate": "2023-02-25",
       "priority": "Media",
       "score": 69,
-      "reason": "2069 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2069 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "13E0D6E7D53D",
@@ -4257,8 +4257,8 @@
       "warrantyEndDate": "2023-02-21",
       "priority": "Media",
       "score": 69,
-      "reason": "2068 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2068 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "9B68874920C0",
@@ -4275,8 +4275,8 @@
       "warrantyEndDate": "2023-06-05",
       "priority": "Media",
       "score": 69,
-      "reason": "2063 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2063 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "19F3FDFD5671",
@@ -4293,8 +4293,8 @@
       "warrantyEndDate": "2023-01-20",
       "priority": "Media",
       "score": 69,
-      "reason": "2063 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2063 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "8CE380AFB293",
@@ -4311,8 +4311,8 @@
       "warrantyEndDate": "2023-02-06",
       "priority": "Media",
       "score": 69,
-      "reason": "2062 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2062 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "5223E9BF8E3C",
@@ -4329,8 +4329,8 @@
       "warrantyEndDate": "2023-05-05",
       "priority": "Media",
       "score": 69,
-      "reason": "2062 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2062 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "F43025119C42",
@@ -4347,8 +4347,8 @@
       "warrantyEndDate": "2023-05-21",
       "priority": "Media",
       "score": 69,
-      "reason": "2058 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2058 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "CB8E3176A503",
@@ -4365,8 +4365,8 @@
       "warrantyEndDate": "2023-02-27",
       "priority": "Media",
       "score": 69,
-      "reason": "2056 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2056 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "1E6A4EBD51A9",
@@ -4383,8 +4383,8 @@
       "warrantyEndDate": "2023-01-14",
       "priority": "Media",
       "score": 69,
-      "reason": "2056 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2056 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "6C46DA043ABA",
@@ -4401,8 +4401,8 @@
       "warrantyEndDate": "2023-01-13",
       "priority": "Media",
       "score": 69,
-      "reason": "2056 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2056 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "CA9820CE15AC",
@@ -4419,8 +4419,8 @@
       "warrantyEndDate": "2023-02-09",
       "priority": "Media",
       "score": 69,
-      "reason": "2056 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2056 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "4C42608E5585",
@@ -4437,8 +4437,8 @@
       "warrantyEndDate": "2023-01-14",
       "priority": "Media",
       "score": 69,
-      "reason": "2055 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2055 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "700B024C6C70",
@@ -4455,8 +4455,8 @@
       "warrantyEndDate": "2023-02-26",
       "priority": "Media",
       "score": 69,
-      "reason": "2055 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2055 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     },
     {
       "id": "F3CBA3173737",
@@ -4473,25 +4473,25 @@
       "warrantyEndDate": "2023-01-08",
       "priority": "Media",
       "score": 69,
-      "reason": "2054 dias sem servico, rodagem alta",
-      "recommendedAction": "Acionamento prioritario da concessionaria"
+      "reason": "2054 dias sem serviço, rodagem alta",
+      "recommendedAction": "Acionamento prioritário da concessionária"
     }
   ],
   "insights": [
     {
       "title": "Service Share estimado",
       "value": "51.0%",
-      "description": "89.569 VINs voltaram para servico pago nos ultimos 12 meses."
+      "description": "89.569 VINs voltaram para serviço pago nos últimos 12 meses."
     },
     {
-      "title": "Tendencia de oficina",
+      "title": "Tendência de oficina",
       "value": "-30.6%",
-      "description": "Comparacao do volume dos 3 meses mais recentes contra os 3 meses anteriores."
+      "description": "Comparação do volume dos 3 meses mais recentes contra os 3 meses anteriores."
     },
     {
-      "title": "Concessionarias com oportunidade",
+      "title": "Concessionárias com oportunidade",
       "value": "8",
-      "description": "Lojas com base relevante e menor retorno recente para priorizar plano de acao."
+      "description": "Lojas com base relevante e menor retorno recente para priorizar plano de ação."
     }
   ],
   "opportunities": {
@@ -4603,28 +4603,28 @@
     ],
     "playbook": [
       {
-        "segment": "Risco de evasao",
-        "trigger": "Mais de 365 dias sem servico",
-        "action": "Contato ativo da concessionaria com cupom de revisao e opcao de retirada/entrega.",
-        "metric": "Conversao de lead em ordem de servico em 30 dias"
+        "segment": "Risco de evasão",
+        "trigger": "Mais de 365 dias sem serviço",
+        "action": "Contato ativo da concessionária com cupom de revisão e opção de retirada/entrega.",
+        "metric": "Conversão de lead em ordem de serviço em 30 dias"
       },
       {
-        "segment": "Primeira manutencao",
+        "segment": "Primeira manutenção",
         "trigger": "Apenas uma passagem na rede",
-        "action": "Sequencia de lembretes para segunda revisao com preco fechado e agenda rapida.",
-        "metric": "Taxa de retorno para segunda manutencao"
+        "action": "Sequência de lembretes para segunda revisão com preço fechado e agenda rápida.",
+        "metric": "Taxa de retorno para segunda manutenção"
       },
       {
         "segment": "Oportunidade digital",
-        "trigger": "Historico sem agenda digital",
-        "action": "Oferta de agendamento pelo app e confirmacao por canal preferido.",
+        "trigger": "Histórico sem agenda digital",
+        "action": "Oferta de agendamento pelo app e confirmação por canal preferido.",
         "metric": "Aumento do agenda rate"
       },
       {
         "segment": "Rodagem alta",
         "trigger": "Estimativa acima de 18 mil km/ano",
-        "action": "Plano preventivo por km, pneus, freios e revisao de seguranca.",
-        "metric": "Ticket medio e recorrencia por VIN"
+        "action": "Plano preventivo por km, pneus, freios e revisão de segurança.",
+        "metric": "Ticket médio e recorrência por VIN"
       }
     ]
   }

@@ -15,3 +15,9 @@ data/*.xls
 
 expo-env.d.ts
 # @end expo-cli
+
+# builds
+*.apk
+*.aab
+.env
+.env.local

@@ -139,7 +139,7 @@ def update_vin_state(state: dict, row: dict, service_date: dt.date | None) -> No
 
 def add_counter_item(counter: Counter, total: int, limit: int = 8) -> list[dict]:
     return [
-        {"label": str(label) if label != "" else "Nao informado", "count": count, "share": pct(count, total)}
+        {"label": str(label) if label != "" else "Não informado", "count": count, "share": pct(count, total)}
         for label, count in counter.most_common(limit)
     ]
 
@@ -150,7 +150,7 @@ def trend_delta(current: int, previous: int) -> float:
 
 def main() -> None:
     if not SOURCE.exists():
-        raise SystemExit(f"Planilha nao encontrada: {SOURCE}")
+        raise SystemExit(f"Planilha não encontrada: {SOURCE}")
 
     total_orders = 0
     agenda_orders = 0
@@ -198,11 +198,11 @@ def main() -> None:
             service_date = parse_date(row.get("ServiceDate"))
             opened = parse_date(row.get("ServiceOpenDate"))
             closed = parse_date(row.get("ServiceClosedDate"))
-            dealer = row.get("DealerCode") or "Nao informado"
+            dealer = row.get("DealerCode") or "Não informado"
             model = row.get("ModelName") or "Sem modelo"
             vin = row.get("VIN_Hash") or ""
-            source = row.get("MainSource") or "Nao informado"
-            country = row.get("Country") or "Nao informado"
+            source = row.get("MainSource") or "Não informado"
+            country = row.get("Country") or "Não informado"
             km = parse_int(row.get("KM"))
 
             if service_date:
@@ -226,8 +226,8 @@ def main() -> None:
 
             countries[country] += 1
             service_sources[source] += 1
-            maintenance_numbers[row.get("MaintenanceNumber") or "Nao informado"] += 1
-            status_counter[row.get("StatusUSA") or "Nao informado"] += 1
+            maintenance_numbers[row.get("MaintenanceNumber") or "Não informado"] += 1
+            status_counter[row.get("StatusUSA") or "Não informado"] += 1
 
             dealer_bucket = dealer_stats[dealer]
             dealer_bucket["orders"] += 1
@@ -251,7 +251,7 @@ def main() -> None:
                 model_bucket["latestService"] = service_date
 
     if analysis_date is None:
-        raise SystemExit("Nao foi possivel identificar datas de servico.")
+        raise SystemExit("Não foi possível identificar datas de serviço.")
 
     last12_start = analysis_date - dt.timedelta(days=365)
     active_last12_vins = {
@@ -308,11 +308,11 @@ def main() -> None:
             km_per_year = round(state["lastKm"] / years)
 
         if days_since <= 365 and service_count >= 3:
-            segment_counts["Clientes fieis"] += 1
+            segment_counts["Clientes fiéis"] += 1
         elif days_since > 365:
-            segment_counts["Risco de evasao"] += 1
+            segment_counts["Risco de evasão"] += 1
         elif service_count <= 1:
-            segment_counts["Primeira manutencao"] += 1
+            segment_counts["Primeira manutenção"] += 1
         elif not had_agenda:
             segment_counts["Oportunidade digital"] += 1
         else:
@@ -322,17 +322,17 @@ def main() -> None:
         reasons = []
         if days_since >= 420:
             score += 45
-            reasons.append(f"{days_since} dias sem servico")
+            reasons.append(f"{days_since} dias sem serviço")
         elif days_since >= 330:
             score += 32
-            reasons.append("janela anual de revisao")
+            reasons.append("janela anual de revisão")
         elif days_since >= 240:
             score += 18
-            reasons.append("aproximando revisao")
+            reasons.append("aproximando revisão")
 
         if service_count <= 1:
             score += 16
-            reasons.append("baixo historico na rede")
+            reasons.append("baixo histórico na rede")
         elif service_count == 2:
             score += 8
 
@@ -365,18 +365,18 @@ def main() -> None:
         if score >= 45:
             next_due_days = avg_interval if avg_interval else 365
             next_due = last_service + dt.timedelta(days=next_due_days)
-            action = "Contato consultivo com oferta de revisao"
+            action = "Contato consultivo com oferta de revisão"
             if not had_agenda:
                 action = "Enviar link de agendamento e lembrete personalizado"
             if days_to_warranty_end is not None and -180 <= days_to_warranty_end <= 120:
-                action = "Check-up de garantia e pacote de manutencao"
+                action = "Check-up de garantia e pacote de manutenção"
             if days_since >= 420:
-                action = "Acionamento prioritario da concessionaria"
+                action = "Acionamento prioritário da concessionária"
 
             lead = {
                 "id": vin[:12].upper(),
                 "vinMask": f"{vin[:6].upper()}...{vin[-4:].upper()}",
-                "dealerCode": state["lastDealer"] or "Nao informado",
+                "dealerCode": state["lastDealer"] or "Não informado",
                 "modelName": state["lastModel"] or "Sem modelo",
                 "modelYear": state["lastModelYear"],
                 "lastServiceDate": iso(last_service),
@@ -463,7 +463,7 @@ def main() -> None:
             "generatedAt": dt.datetime.now().isoformat(timespec="seconds"),
             "analysisDate": iso(analysis_date),
             "dateRange": {"start": iso(min_service_date), "end": iso(analysis_date)},
-            "methodology": "Service Share estimado = VINs unicos com servico pago nos ultimos 12 meses / VINs unicos observados na base.",
+            "methodology": "Service Share estimado = VINs únicos com serviço pago nos últimos 12 meses / VINs únicos observados na base.",
         },
         "overview": {
             "serviceShare": service_share,
@@ -501,45 +501,45 @@ def main() -> None:
             {
                 "title": "Service Share estimado",
                 "value": f"{service_share}%",
-                "description": f"{len(active_last12_vins):,} VINs voltaram para servico pago nos ultimos 12 meses.".replace(",", "."),
+                "description": f"{len(active_last12_vins):,} VINs voltaram para serviço pago nos últimos 12 meses.".replace(",", "."),
             },
             {
-                "title": "Tendencia de oficina",
+                "title": "Tendência de oficina",
                 "value": f"{trend_delta(last3_orders, previous3_orders)}%",
-                "description": "Comparacao do volume dos 3 meses mais recentes contra os 3 meses anteriores.",
+                "description": "Comparação do volume dos 3 meses mais recentes contra os 3 meses anteriores.",
             },
             {
-                "title": "Concessionarias com oportunidade",
+                "title": "Concessionárias com oportunidade",
                 "value": str(len(low_share_dealers)),
-                "description": "Lojas com base relevante e menor retorno recente para priorizar plano de acao.",
+                "description": "Lojas com base relevante e menor retorno recente para priorizar plano de ação.",
             },
         ],
         "opportunities": {
             "lowShareDealers": low_share_dealers,
             "playbook": [
                 {
-                    "segment": "Risco de evasao",
-                    "trigger": "Mais de 365 dias sem servico",
-                    "action": "Contato ativo da concessionaria com cupom de revisao e opcao de retirada/entrega.",
-                    "metric": "Conversao de lead em ordem de servico em 30 dias",
+                    "segment": "Risco de evasão",
+                    "trigger": "Mais de 365 dias sem serviço",
+                    "action": "Contato ativo da concessionária com cupom de revisão e opção de retirada/entrega.",
+                    "metric": "Conversão de lead em ordem de serviço em 30 dias",
                 },
                 {
-                    "segment": "Primeira manutencao",
+                    "segment": "Primeira manutenção",
                     "trigger": "Apenas uma passagem na rede",
-                    "action": "Sequencia de lembretes para segunda revisao com preco fechado e agenda rapida.",
-                    "metric": "Taxa de retorno para segunda manutencao",
+                    "action": "Sequência de lembretes para segunda revisão com preço fechado e agenda rápida.",
+                    "metric": "Taxa de retorno para segunda manutenção",
                 },
                 {
                     "segment": "Oportunidade digital",
-                    "trigger": "Historico sem agenda digital",
-                    "action": "Oferta de agendamento pelo app e confirmacao por canal preferido.",
+                    "trigger": "Histórico sem agenda digital",
+                    "action": "Oferta de agendamento pelo app e confirmação por canal preferido.",
                     "metric": "Aumento do agenda rate",
                 },
                 {
                     "segment": "Rodagem alta",
                     "trigger": "Estimativa acima de 18 mil km/ano",
-                    "action": "Plano preventivo por km, pneus, freios e revisao de seguranca.",
-                    "metric": "Ticket medio e recorrencia por VIN",
+                    "action": "Plano preventivo por km, pneus, freios e revisão de segurança.",
+                    "metric": "Ticket médio e recorrência por VIN",
                 },
             ],
         },
