@@ -2,9 +2,9 @@ import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { useMemo, useState } from "react";
 import { Pressable, ScrollView, StyleSheet, View } from "react-native";
-import { AppText, Button, Card, Chip, colors, EmptyState, MetricRow, radii, Screen, Section, spacing, useToast } from "@/design-system";
-import { longDate, parseISODate } from "@/domain/format";
-import { leadTitle } from "@/domain/leads";
+import { AppText, Button, Card, Chip, colors, EmptyState, MetricRow, radii, Screen, Section, spacing, TextField, useLayout, useToast } from "@/design-system";
+import { longDate, parseISODate, titleCase } from "@/domain/format";
+import { appointmentReminderDate } from "@/domain/reminders";
 import { nextWorkshopDays, SERVICE_TYPES, serviceForAlert, serviceLabel, TIME_SLOTS, type ServiceTypeId } from "@/domain/schedule";
 import { successFeedback } from "@/iot/actuators";
 import { useApp } from "@/state/AppProvider";
@@ -12,40 +12,61 @@ import { StickyFooter } from "@/ui/StickyFooter";
 
 export default function ScheduleScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { leadById, scheduleService, crm } = useApp();
+  const { leadById, customerById, scheduleService, crm } = useApp();
   const toast = useToast();
+  const { isCompact, isWide } = useLayout();
   const lead = leadById(String(id));
+  const customer = customerById(String(id));
+  // Agenda tanto leads quanto clientes fiéis (que não viram lead)
+  const target = lead ?? (customer ? { id: customer.id, modelName: customer.vehicle.modelName, vinMask: customer.vehicle.vinMask, dealerCode: customer.dealerCode, modelYear: customer.vehicle.modelYear } : null);
   const days = useMemo(() => nextWorkshopDays(new Date(), 10), []);
   const [service, setService] = useState<ServiceTypeId>(serviceForAlert(lead?.iotAlert?.code));
   const [date, setDate] = useState(days[0]);
   const [slot, setSlot] = useState<string | null>(null);
+  const [note, setNote] = useState("");
   const [saving, setSaving] = useState(false);
 
-  if (!lead) {
+  if (!target) {
     return (
       <Screen title="Agendar serviço" back>
-        <EmptyState title="Lead não encontrado" />
+        <EmptyState title="Cliente não encontrado" actionLabel="Voltar" onAction={() => router.back()} />
       </Screen>
     );
   }
+  const title = `${titleCase(target.modelName)}${target.modelYear ? ` ${target.modelYear}` : ""}`;
+  const reminderAt = slot ? appointmentReminderDate(date, slot) : null;
+  const reminderText = !slot
+    ? "Escolha o horário"
+    : reminderAt
+      ? `Notificação ${reminderAt.toLocaleString("pt-BR", { weekday: "short", day: "2-digit", month: "2-digit", hour: "2-digit", minute: "2-digit" })}`
+      : "Sem lembrete (horário muito próximo)";
 
   // Horários já ocupados na mesma concessionária e dia
   const taken = new Set(
-    crm.appointments.filter((a) => a.status === "confirmado" && a.dealerCode === lead.dealerCode && a.date === date).map((a) => a.slot)
+    crm.appointments.filter((a) => a.status === "confirmado" && a.dealerCode === target.dealerCode && a.date === date).map((a) => a.slot)
   );
 
   const confirm = async () => {
     if (!slot) return;
     setSaving(true);
-    await scheduleService(lead, { serviceType: service, date, slot, dealerCode: lead.dealerCode });
-    await successFeedback();
-    toast.show({ title: "Serviço agendado!", message: `${longDate(date)} às ${slot} · Dealer ${lead.dealerCode}`, tone: "success" });
-    router.back();
+    try {
+      const { reminder } = await scheduleService(target, { serviceType: service, date, slot, dealerCode: target.dealerCode, note: note.trim() });
+      await successFeedback();
+      toast.show({
+        title: "Serviço agendado!",
+        message: `${longDate(date)} às ${slot} · Dealer ${target.dealerCode}${reminder ? " · lembrete criado" : ""}`,
+        tone: "success"
+      });
+      router.back();
+    } catch {
+      toast.show({ title: "Não foi possível agendar", message: "Tente novamente.", tone: "danger" });
+      setSaving(false);
+    }
   };
 
   return (
     <View style={{ flex: 1 }}>
-      <Screen back eyebrow="Agendar serviço" title={leadTitle(lead)} subtitle={`Oficina da concessionária ${lead.dealerCode}`}>
+      <Screen back eyebrow="Agendar serviço" title={title} subtitle={`Oficina da concessionária ${target.dealerCode}`}>
         <Section title="Serviço">
           <View style={styles.services}>
             {SERVICE_TYPES.map((s) => {
@@ -54,7 +75,7 @@ export default function ScheduleScreen() {
                 <Pressable
                   key={s.id}
                   onPress={() => setService(s.id)}
-                  style={[styles.service, active && styles.serviceActive]}
+                  style={[styles.service, { flexBasis: isWide ? "15%" : isCompact ? "47%" : "31%" }, active && styles.serviceActive]}
                   accessibilityRole="radio"
                   accessibilityState={{ selected: active }}
                 >
@@ -110,13 +131,19 @@ export default function ScheduleScreen() {
           </View>
         </Section>
 
+        <Section title="Observação" subtitle="Opcional: aparece no histórico do cliente">
+          <TextField value={note} onChangeText={setNote} placeholder="Ex.: cliente pediu leva-e-traz, verificar ruído na suspensão…" multiline />
+        </Section>
+
         <Card tone="muted">
           <AppText variant="overline" color={colors.textMuted}>
             Resumo
           </AppText>
           <MetricRow label="Serviço" value={serviceLabel(service)} />
           <MetricRow label="Quando" value={slot ? `${longDate(date)} às ${slot}` : `${longDate(date)} · escolha o horário`} />
-          <MetricRow label="Veículo" value={`${leadTitle(lead)} · ${lead.vinMask}`} last />
+          {note.trim() ? <MetricRow label="Observação" value={note.trim()} /> : null}
+          <MetricRow label="Veículo" value={`${title} · ${target.vinMask}`} />
+          <MetricRow label="Lembrete" value={reminderText} last />
         </Card>
         <View style={{ height: 60 }} />
       </Screen>
@@ -130,7 +157,6 @@ export default function ScheduleScreen() {
 const styles = StyleSheet.create({
   services: { flexDirection: "row", flexWrap: "wrap", gap: spacing.sm },
   service: {
-    flexBasis: "31%",
     flexGrow: 1,
     minHeight: 104,
     borderRadius: radii.md,
