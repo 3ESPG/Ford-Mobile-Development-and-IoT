@@ -185,7 +185,8 @@ Na sprint de IA, a equipe classifica os clientes nesses 4 perfis com um modelo *
 
 | | |
 |---|---|
-| **Download do APK** | **👉 [ford-service-pulse-v1.4.0.apk](https://github.com/3ESPG/Ford-Mobile-Development-and-IoT/releases/download/v1.4.0/ford-service-pulse-v1.4.0.apk)** ([Releases](https://github.com/3ESPG/Ford-Mobile-Development-and-IoT/releases/tag/v1.4.0)) |
+| **Download do APK** | **👉 [Instalar pela Expo (EAS Build)](https://expo.dev/accounts/felipe3103/projects/ford-service-pulse/builds/7679a472-7fb1-476e-860f-443b5ea0c126)**: abra no celular e toque em *Install*, ou escaneie o QR code |
+| Alternativa | [ford-service-pulse-v1.4.0.apk no GitHub Releases](https://github.com/3ESPG/Ford-Mobile-Development-and-IoT/releases/download/v1.4.0/ford-service-pulse-v1.4.0.apk) |
 | Pacote Android | `br.com.fiap.fordservicepulse` |
 | Versão | 1.4.0 (versionCode 4) |
 | Requisitos | Android 7.0+ · funciona **sem internet** (modo demo + base embarcada + SQLite) |
