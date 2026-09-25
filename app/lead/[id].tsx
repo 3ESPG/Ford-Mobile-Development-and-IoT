@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
 import { router, useLocalSearchParams } from "expo-router";
 import { useMemo } from "react";
-import { Share, StyleSheet, View } from "react-native";
+import { Linking, Share, StyleSheet, View } from "react-native";
 import {
   AppText,
   Badge,
@@ -16,18 +16,22 @@ import {
   Screen,
   Section,
   spacing,
+  useLayout,
   useToast
 } from "@/design-system";
 import { daysToMonths, km, longDate, number, relativeTime, shortDate } from "@/domain/format";
 import { CHANNELS, contactMessage, LEAD_STATUS, leadTitle, OUTCOMES, priorityLabel, priorityTone, scoreFactors, suggestedService } from "@/domain/leads";
+import { CUSTOMER_PROFILES } from "@/domain/customers";
 import { serviceLabel } from "@/domain/schedule";
 import { useApp } from "@/state/AppProvider";
+import { ProfileBadge } from "@/ui/ProfileBadge";
 import { StickyFooter } from "@/ui/StickyFooter";
 
 export default function LeadDetailScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
-  const { leadById, snapshot, crm, acknowledgeAlert, setLeadStatus } = useApp();
+  const { leadById, customerById, snapshot, crm, acknowledgeAlert, setLeadStatus } = useApp();
   const toast = useToast();
+  const { isCompact } = useLayout();
   const lead = leadById(String(id));
 
   const factors = useMemo(() => (lead ? scoreFactors(lead, snapshot.meta.analysisDate) : []), [lead, snapshot.meta.analysisDate]);
@@ -45,6 +49,16 @@ export default function LeadDetailScreen() {
   const appointments = crm.appointments.filter((a) => a.leadId === lead.id);
   const message = contactMessage(lead, lead.dealerCode, lead.iotAlert);
   const dealer = snapshot.dealers.find((d) => d.dealerCode === lead.dealerCode);
+  const customer = customerById(lead.id);
+  const phone = customer?.phone.replace(/\D/g, "") ?? "";
+
+  const openUrl = async (url: string) => {
+    try {
+      await Linking.openURL(url);
+    } catch {
+      toast.show({ title: "Canal indisponível neste dispositivo", tone: "warning" });
+    }
+  };
 
   const share = async () => {
     try {
@@ -62,7 +76,7 @@ export default function LeadDetailScreen() {
         title={leadTitle(lead)}
         heroContent={
           <View style={styles.heroRow}>
-            <RingGauge value={lead.score} size={88} stroke={9} color={lead.priority === "Alta" ? "#FF6B5E" : "#FFB547"} track="rgba(255,255,255,0.16)">
+            <RingGauge value={lead.score} size={isCompact ? 72 : 88} stroke={isCompact ? 8 : 9} color={lead.priority === "Alta" ? "#FF6B5E" : "#FFB547"} track="rgba(255,255,255,0.16)">
               <AppText variant="metricS" color={colors.textOnBrand}>
                 {lead.score}
               </AppText>
@@ -99,6 +113,34 @@ export default function LeadDetailScreen() {
               }}
             />
           </Card>
+        ) : null}
+
+        {customer ? (
+          <Section title="Cliente">
+            <Card>
+              <View style={styles.rowBetween}>
+                <View style={{ flex: 1, gap: 2 }}>
+                  <AppText variant="titleM">{customer.name}</AppText>
+                  <AppText variant="caption" color={colors.textMuted}>
+                    {customer.phone} · {CUSTOMER_PROFILES[customer.profile].action.title}
+                  </AppText>
+                </View>
+                <ProfileBadge profile={customer.profile} />
+              </View>
+              <View style={styles.actions}>
+                <Button label="Ligar" icon="call-outline" variant="secondary" size="sm" style={{ flex: 1 }} onPress={() => openUrl(`tel:${phone}`)} />
+                <Button
+                  label="WhatsApp"
+                  icon="logo-whatsapp"
+                  variant="secondary"
+                  size="sm"
+                  style={{ flex: 1 }}
+                  onPress={() => openUrl(`https://wa.me/${phone}?text=${encodeURIComponent(message)}`)}
+                />
+              </View>
+              <Button label="Abrir visão 360° do cliente" variant="ghost" size="sm" iconRight="chevron-forward" onPress={() => router.push(`/cliente/${customer.id}`)} />
+            </Card>
+          </Section>
         ) : null}
 
         <Section title="Por que este cliente?" subtitle="Composição explicável do score de risco de evasão">
@@ -217,6 +259,7 @@ const styles = StyleSheet.create({
   badges: { flexDirection: "row", gap: spacing.xs, flexWrap: "wrap" },
   rowBetween: { flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   factor: { gap: spacing.xs },
+  actions: { flexDirection: "row", gap: spacing.sm },
   timeline: { flexDirection: "row", gap: spacing.md, alignItems: "center" },
   timelineDot: { width: 32, height: 32, borderRadius: 16, alignItems: "center", justifyContent: "center" }
 });

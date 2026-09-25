@@ -1,9 +1,9 @@
 import * as SQLite from "expo-sqlite";
-import type { Appointment, IotAlert, LeadStatus } from "@/domain/types";
+import type { Appointment, IotAlert, LeadStatus, Reminder } from "@/domain/types";
 import type { CrmSnapshot, CrmStore } from "./types";
 
 const DB_NAME = "ford-service-pulse.db";
-const SCHEMA_VERSION = 1;
+const SCHEMA_VERSION = 2;
 
 /** Migrações versionadas via PRAGMA user_version */
 const MIGRATIONS: Record<number, string> = {
@@ -51,6 +51,22 @@ const MIGRATIONS: Record<number, string> = {
       acknowledged INTEGER NOT NULL DEFAULT 0
     );
     CREATE INDEX IF NOT EXISTS idx_alerts_vin ON iot_alerts(vin, code);
+  `,
+  // Sprint 3 (versão final): observação no agendamento + lembretes de serviço
+  2: `
+    ALTER TABLE appointments ADD COLUMN note TEXT NOT NULL DEFAULT '';
+    ALTER TABLE appointments ADD COLUMN reminder_id TEXT;
+    CREATE TABLE IF NOT EXISTS reminders (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      customer_id TEXT NOT NULL,
+      kind TEXT NOT NULL CHECK (kind IN ('revisao','agendamento')),
+      title TEXT NOT NULL,
+      body TEXT NOT NULL,
+      fire_at TEXT NOT NULL,
+      notification_id TEXT,
+      created_at TEXT NOT NULL
+    );
+    CREATE INDEX IF NOT EXISTS idx_reminders_customer ON reminders(customer_id);
   `
 };
 
@@ -65,7 +81,12 @@ const now = () => new Date().toISOString();
 
 type AppointmentRow = {
   id: number; lead_id: string; dealer_code: string; model_name: string; vin_mask: string;
-  service_type: string; date: string; slot: string; status: Appointment["status"]; created_at: string;
+  service_type: string; date: string; slot: string; status: Appointment["status"]; note: string;
+  reminder_id: string | null; created_at: string;
+};
+type ReminderRow = {
+  id: number; customer_id: string; kind: Reminder["kind"]; title: string; body: string;
+  fire_at: string; notification_id: string | null; created_at: string;
 };
 type AlertRow = {
   id: number; vin: string; lead_id: string | null; code: string; severity: IotAlert["severity"];
@@ -100,13 +121,14 @@ export const crmStore: CrmStore = {
 
   async load(): Promise<CrmSnapshot> {
     const conn = await db();
-    const [statusRows, interactionRows, appointmentRows, alertRows] = await Promise.all([
+    const [statusRows, interactionRows, appointmentRows, alertRows, reminderRows] = await Promise.all([
       conn.getAllAsync<{ lead_id: string; status: LeadStatus }>("SELECT lead_id, status FROM lead_status"),
       conn.getAllAsync<{ id: number; lead_id: string; channel: string; outcome: string; note: string; created_at: string }>(
         "SELECT * FROM interactions ORDER BY created_at DESC"
       ),
       conn.getAllAsync<AppointmentRow>("SELECT * FROM appointments ORDER BY date ASC, slot ASC"),
-      conn.getAllAsync<AlertRow>("SELECT * FROM iot_alerts ORDER BY created_at DESC LIMIT 200")
+      conn.getAllAsync<AlertRow>("SELECT * FROM iot_alerts ORDER BY created_at DESC LIMIT 200"),
+      conn.getAllAsync<ReminderRow>("SELECT * FROM reminders ORDER BY fire_at ASC")
     ]);
     return {
       statuses: Object.fromEntries(statusRows.map((r) => [r.lead_id, r.status])),
@@ -128,6 +150,8 @@ export const crmStore: CrmStore = {
         date: r.date,
         slot: r.slot,
         status: r.status,
+        note: r.note,
+        reminderId: r.reminder_id,
         createdAt: r.created_at
       })),
       alerts: alertRows.map((r) => ({
@@ -140,6 +164,16 @@ export const crmStore: CrmStore = {
         message: r.message,
         createdAt: r.created_at,
         acknowledged: r.acknowledged === 1
+      })),
+      reminders: reminderRows.map((r) => ({
+        id: r.id,
+        customerId: r.customer_id,
+        kind: r.kind,
+        title: r.title,
+        body: r.body,
+        fireAt: r.fire_at,
+        notificationId: r.notification_id,
+        createdAt: r.created_at
       }))
     };
   },
@@ -170,7 +204,7 @@ export const crmStore: CrmStore = {
   async addAppointment(input) {
     const conn = await db();
     const result = await conn.runAsync(
-      "INSERT INTO appointments (lead_id, dealer_code, model_name, vin_mask, service_type, date, slot, status, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, 'confirmado', ?)",
+      "INSERT INTO appointments (lead_id, dealer_code, model_name, vin_mask, service_type, date, slot, status, note, reminder_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, 'confirmado', ?, ?, ?)",
       input.leadId,
       input.dealerCode,
       input.modelName,
@@ -178,9 +212,31 @@ export const crmStore: CrmStore = {
       input.serviceType,
       input.date,
       input.slot,
+      input.note,
+      input.reminderId,
       now()
     );
     return result.lastInsertRowId;
+  },
+
+  async addReminder(input) {
+    const conn = await db();
+    const result = await conn.runAsync(
+      "INSERT INTO reminders (customer_id, kind, title, body, fire_at, notification_id, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)",
+      input.customerId,
+      input.kind,
+      input.title,
+      input.body,
+      input.fireAt,
+      input.notificationId,
+      now()
+    );
+    return result.lastInsertRowId;
+  },
+
+  async deleteReminder(id) {
+    const conn = await db();
+    await conn.runAsync("DELETE FROM reminders WHERE id = ?", id);
   },
 
   async updateAppointmentStatus(id, status) {
@@ -216,6 +272,6 @@ export const crmStore: CrmStore = {
 
   async reset() {
     const conn = await db();
-    await conn.execAsync("DELETE FROM lead_status; DELETE FROM interactions; DELETE FROM appointments; DELETE FROM iot_alerts; DELETE FROM settings;");
+    await conn.execAsync("DELETE FROM lead_status; DELETE FROM interactions; DELETE FROM appointments; DELETE FROM iot_alerts; DELETE FROM reminders; DELETE FROM settings;");
   }
 };

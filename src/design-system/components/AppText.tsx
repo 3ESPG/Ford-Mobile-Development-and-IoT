@@ -9,5 +9,6 @@ export type AppTextProps = TextProps & {
 
 /** Texto tipado pela escala do Design System. Nunca use <Text> cru nas telas. */
 export function AppText({ variant = "body", color = colors.textPrimary, align, style, ...rest }: AppTextProps) {
-  return <Text {...rest} style={[typography[variant], { color, textAlign: align }, style]} />;
+  // respeita a fonte ampliada do sistema, com teto para não quebrar o layout
+  return <Text maxFontSizeMultiplier={1.35} {...rest} style={[typography[variant], { color, textAlign: align }, style]} />;
 }

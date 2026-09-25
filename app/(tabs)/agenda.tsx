@@ -23,18 +23,23 @@ import { SERVICE_TYPES, serviceLabel } from "@/domain/schedule";
 import type { Appointment } from "@/domain/types";
 import { successFeedback } from "@/iot/actuators";
 import { useApp } from "@/state/AppProvider";
+import { useDealerScope } from "@/state/selectors";
 import { ProfileButton } from "@/ui/ProfileButton";
 
 export default function AgendaScreen() {
   const { crm, setAppointmentStatus, leadById } = useApp();
+  const { dealer } = useDealerScope();
   const toast = useToast();
   const [tab, setTab] = useState<"proximos" | "historico">("proximos");
   const today = new Date().toISOString().slice(0, 10);
 
-  const upcoming = crm.appointments.filter((a) => a.status === "confirmado");
-  const done = crm.appointments.filter((a) => a.status !== "confirmado");
-  const completed = crm.appointments.filter((a) => a.status === "concluido").length;
-  const cancelled = crm.appointments.filter((a) => a.status === "cancelado").length;
+  // gestor e consultor veem só a oficina da própria concessionária
+  const appointments = dealer ? crm.appointments.filter((a) => a.dealerCode === dealer) : crm.appointments;
+  const interactions = dealer ? crm.interactions.filter((i) => leadById(i.leadId)?.dealerCode === dealer) : crm.interactions;
+  const upcoming = appointments.filter((a) => a.status === "confirmado");
+  const done = appointments.filter((a) => a.status !== "confirmado");
+  const completed = appointments.filter((a) => a.status === "concluido").length;
+  const cancelled = appointments.filter((a) => a.status === "cancelado").length;
   const showRate = completed + cancelled ? Math.round((completed / (completed + cancelled)) * 100) : null;
 
   const grouped = useMemo(() => {
@@ -90,7 +95,7 @@ export default function AgendaScreen() {
               {items.map((a) => {
                 const icon = SERVICE_TYPES.find((s) => s.id === a.serviceType)?.icon || "construct-outline";
                 return (
-                  <Card key={a.id} onPress={() => router.push(`/lead/${a.leadId}`)}>
+                  <Card key={a.id} onPress={() => router.push(`/cliente/${a.leadId}`)}>
                     <View style={styles.row}>
                       <IconTile name={icon as never} tone="info" />
                       <View style={{ flex: 1 }}>
@@ -102,6 +107,12 @@ export default function AgendaScreen() {
                       <Badge label={a.slot} tone="brand" icon="time-outline" />
                     </View>
                     {leadById(a.leadId)?.iotAlert ? <Badge label="Originado por alerta IoT" tone="iot" icon="hardware-chip-outline" /> : null}
+                    {a.note ? (
+                      <AppText variant="caption" color={colors.textSecondary}>
+                        Obs.: {a.note}
+                      </AppText>
+                    ) : null}
+                    {a.reminderId ? <Badge label="Lembrete na véspera" tone="warning" icon="alarm-outline" /> : null}
                     <View style={styles.actions}>
                       <Button label="Cancelar" variant="danger" size="sm" onPress={() => update(a, "cancelado")} style={{ flex: 1 }} />
                       <Button label="Cliente compareceu" icon="checkmark" size="sm" onPress={() => update(a, "concluido")} style={{ flex: 1.4 }} />
@@ -119,7 +130,7 @@ export default function AgendaScreen() {
               <EmptyState title="Sem serviços encerrados" message="Serviços concluídos ou cancelados aparecem aqui." />
             ) : (
               done.map((a) => (
-                <Card key={a.id} onPress={() => router.push(`/lead/${a.leadId}`)} style={styles.row}>
+                <Card key={a.id} onPress={() => router.push(`/cliente/${a.leadId}`)} style={styles.row}>
                   <IconTile name={a.status === "concluido" ? "shield-checkmark" : "close-circle"} tone={a.status === "concluido" ? "success" : "danger"} />
                   <View style={{ flex: 1 }}>
                     <AppText variant="titleS">{serviceLabel(a.serviceType)}</AppText>
@@ -133,10 +144,10 @@ export default function AgendaScreen() {
             )}
           </Section>
           <Section title="Últimos contatos">
-            {crm.interactions.length === 0 ? (
+            {interactions.length === 0 ? (
               <EmptyState title="Nenhum contato registrado" />
             ) : (
-              crm.interactions.slice(0, 15).map((i) => {
+              interactions.slice(0, 15).map((i) => {
                 const lead = leadById(i.leadId);
                 return (
                   <Card key={i.id} onPress={() => router.push(`/lead/${i.leadId}`)} style={styles.row}>

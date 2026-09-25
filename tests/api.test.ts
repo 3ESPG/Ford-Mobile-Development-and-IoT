@@ -78,3 +78,29 @@ describe("API WebSocket", () => {
     assert.ok(frames[2].dtc.includes("P0420"));
   });
 });
+
+describe("API · autenticação JWT", () => {
+  const login = (body: object) => fetch(`${base}/auth/login`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+
+  it("POST /auth/login devolve token e perfil; GET /auth/me valida o token", async () => {
+    const res = await login({ email: "gestor@ford.com", senha: "ford@2026" });
+    assert.equal(res.status, 200);
+    const { token, user } = await res.json();
+    assert.equal(user.role, "GESTOR_CONCESSIONARIA");
+    const me = await fetch(`${base}/auth/me`, { headers: { Authorization: `Bearer ${token}` } });
+    assert.equal(me.status, 200);
+    assert.equal((await me.json()).email, "gestor@ford.com");
+  });
+
+  it("senha errada → 401 e corpo vazio → 400", async () => {
+    assert.equal((await login({ email: "gestor@ford.com", senha: "x" })).status, 401);
+    assert.equal((await login({})).status, 400);
+  });
+
+  it("token ausente em /auth/me ou inválido em /api → 401 (logout no app)", async () => {
+    assert.equal((await fetch(`${base}/auth/me`)).status, 401);
+    const res = await fetch(`${base}/api/snapshot`, { headers: { Authorization: "Bearer token.falso.demo" } });
+    assert.equal(res.status, 401);
+    assert.equal((await res.json()).error.code, "INVALID_TOKEN");
+  });
+});

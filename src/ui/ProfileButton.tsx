@@ -1,23 +1,23 @@
 import { router } from "expo-router";
 import { Pressable, StyleSheet } from "react-native";
 import { AppText, colors } from "@/design-system";
-import { useApp } from "@/state/AppProvider";
+import { useAuth } from "@/state/AuthProvider";
 
-/** Avatar com as iniciais do usuário — abre Ajustes */
+/** Avatar com as iniciais do usuário — abre o Perfil */
 export function ProfileButton() {
-  const { settings } = useApp();
-  const initials = (settings.profile?.name || "?")
+  const { user } = useAuth();
+  const initials = (user?.name || "?")
     .split(" ")
-    .map((p) => p[0])
+    .map((p: string) => p[0])
     .slice(0, 2)
     .join("")
     .toUpperCase();
   return (
     <Pressable
-      onPress={() => router.push("/settings")}
+      onPress={() => router.push("/perfil")}
       style={({ pressed }) => [styles.avatar, pressed && { opacity: 0.8 }]}
       accessibilityRole="button"
-      accessibilityLabel="Abrir ajustes e perfil"
+      accessibilityLabel="Abrir perfil"
     >
       <AppText variant="bodySmStrong" color={colors.textOnBrand}>
         {initials}

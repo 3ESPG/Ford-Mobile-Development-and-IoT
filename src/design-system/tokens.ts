@@ -40,7 +40,9 @@ export const palette = {
   red600: "#C8231A",
   red100: "#FCE4E2",
   violet600: "#5B3CC4",
-  violet100: "#ECE7FB"
+  violet100: "#ECE7FB",
+  teal600: "#0B7285",
+  teal100: "#DCF2F5"
 } as const;
 
 export const colors = {
@@ -82,11 +84,13 @@ export const colors = {
   infoSoft: palette.bright100,
   iot: palette.violet600,
   iotSoft: palette.violet100,
+  teal: palette.teal600,
+  tealSoft: palette.teal100,
 
   overlay: "rgba(0, 5, 46, 0.55)"
 } as const;
 
-export type Tone = "brand" | "accent" | "success" | "warning" | "danger" | "info" | "neutral" | "iot";
+export type Tone = "brand" | "accent" | "success" | "warning" | "danger" | "info" | "neutral" | "iot" | "teal";
 
 export const toneColors: Record<Tone, { fg: string; bg: string }> = {
   brand: { fg: colors.brand, bg: colors.accentSubtle },
@@ -96,7 +100,8 @@ export const toneColors: Record<Tone, { fg: string; bg: string }> = {
   danger: { fg: colors.danger, bg: colors.dangerSoft },
   info: { fg: colors.info, bg: colors.infoSoft },
   neutral: { fg: colors.textSecondary, bg: colors.surfaceMuted },
-  iot: { fg: colors.iot, bg: colors.iotSoft }
+  iot: { fg: colors.iot, bg: colors.iotSoft },
+  teal: { fg: colors.teal, bg: colors.tealSoft }
 };
 
 /** Gradiente do cabeçalho (hero) — azul Ford profundo → azul Ford */

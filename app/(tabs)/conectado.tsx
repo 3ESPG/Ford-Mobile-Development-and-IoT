@@ -21,18 +21,21 @@ import {
   Sparkline,
   StatusDot,
   spacing,
+  useLayout,
   useToast,
   type IconName,
   type Tone
 } from "@/design-system";
 import { drivingLabel, drivingScore, HARSH_THRESHOLD_G } from "@/domain/driving";
 import { decimal, km, number, relativeTime, titleCase } from "@/domain/format";
+import { connectedFleet } from "@/domain/fleet";
 import { DTC_DESCRIPTIONS, evaluateRules, healthScore, SCENARIOS, severityRank, type RuleHit, type TirePressures } from "@/domain/telemetry";
 import type { AlertSeverity, TelemetryMode } from "@/domain/types";
 import { notifyAlert } from "@/iot/actuators";
 import { useDrivingSensor } from "@/iot/useDrivingSensor";
 import { useTelemetry } from "@/iot/useTelemetry";
 import { useApp } from "@/state/AppProvider";
+import { useDealerScope } from "@/state/selectors";
 import { ProfileButton } from "@/ui/ProfileButton";
 
 const SEVERITY: Record<AlertSeverity, { label: string; tone: Tone }> = {
@@ -48,7 +51,14 @@ const MODE_HELP: Record<TelemetryMode, string> = {
 };
 
 export default function ConectadoScreen() {
-  const { fleet, settings, updateSettings, raiseAlert, crm, acknowledgeAlert } = useApp();
+  const { fleet: networkFleet, snapshot, settings, updateSettings, raiseAlert, crm, acknowledgeAlert } = useApp();
+  const { dealer } = useDealerScope();
+  // gestor/consultor monitoram os veículos da própria loja; admin, a frota da rede.
+  // snapshot.leads é estável: mudanças no CRM (novos alertas) não reiniciam a telemetria.
+  const fleet = useMemo(() => {
+    const own = dealer ? snapshot.leads.filter((l) => l.dealerCode === dealer) : [];
+    return own.length ? connectedFleet(own, 5, false) : networkFleet;
+  }, [dealer, snapshot.leads, networkFleet]);
   const toast = useToast();
   const focused = useIsFocused();
   const [vin, setVin] = useState(fleet[0]?.lead.id);
@@ -319,8 +329,9 @@ function Live({ label, value, unit }: { label: string; value: string; unit: stri
 
 function SensorTile({ icon, label, value, progress, tone }: { icon: IconName; label: string; value: string; progress?: number; tone: Tone }) {
   const color = { danger: colors.danger, warning: colors.warning, success: colors.success, accent: colors.accent, neutral: colors.border }[tone as string] || colors.accent;
+  const { columns } = useLayout();
   return (
-    <Card style={styles.tile}>
+    <Card style={[styles.tile, { flexBasis: columns === 4 ? "22%" : "47%" }]}>
       <View style={styles.row}>
         <IconTile name={icon} tone={tone} size="sm" />
         <AppText variant="caption" color={colors.textMuted} style={{ flex: 1 }}>

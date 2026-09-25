@@ -2,14 +2,14 @@
  * Implementação web (pré-visualização no navegador) do mesmo contrato do SQLite.
  * Persistência em localStorage — no APK Android é usado o SQLite (crmStore.ts).
  */
-import type { Appointment, Interaction, IotAlert, LeadStatus } from "@/domain/types";
+import type { Appointment, Interaction, IotAlert, LeadStatus, Reminder } from "@/domain/types";
 import type { CrmSnapshot, CrmStore } from "./types";
 
 const KEY = "ford-service-pulse:v1";
 
 type State = CrmSnapshot & { settings: Record<string, string>; seq: number };
 
-const empty = (): State => ({ statuses: {}, interactions: [], appointments: [], alerts: [], settings: {}, seq: 1 });
+const empty = (): State => ({ statuses: {}, interactions: [], appointments: [], alerts: [], reminders: [], settings: {}, seq: 1 });
 
 let state: State = empty();
 
@@ -49,7 +49,8 @@ export const crmStore: CrmStore = {
       statuses: { ...state.statuses },
       interactions: [...state.interactions].sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
       appointments: [...state.appointments].sort((a, b) => (a.date + a.slot).localeCompare(b.date + b.slot)),
-      alerts: [...state.alerts].sort((a, b) => b.createdAt.localeCompare(a.createdAt))
+      alerts: [...state.alerts].sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
+      reminders: [...state.reminders].sort((a, b) => a.fireAt.localeCompare(b.fireAt))
     };
   },
   async setLeadStatus(leadId: string, status: LeadStatus) {
@@ -67,6 +68,16 @@ export const crmStore: CrmStore = {
     state.appointments.push(item);
     write();
     return item.id;
+  },
+  async addReminder(input) {
+    const item: Reminder = { ...input, id: nextId(), createdAt: now() };
+    state.reminders.push(item);
+    write();
+    return item.id;
+  },
+  async deleteReminder(id) {
+    state.reminders = state.reminders.filter((r) => r.id !== id);
+    write();
   },
   async updateAppointmentStatus(id, status) {
     state.appointments = state.appointments.map((a) => (a.id === id ? { ...a, status } : a));

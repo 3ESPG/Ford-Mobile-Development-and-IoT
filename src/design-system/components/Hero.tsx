@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import { Pressable, StyleSheet, View } from "react-native";
 import Svg, { Circle, Path } from "react-native-svg";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { contentMaxWidth, useLayout } from "../layout";
 import { colors, gradients, radii, spacing } from "../tokens";
 import { AppText } from "./AppText";
 
@@ -34,14 +35,18 @@ function SignalArt() {
 /** Cabeçalho com gradiente azul Ford usado em todas as telas (consistência visual) */
 export function Hero({ title, eyebrow, subtitle, right, back, children, overlap = 0 }: HeroProps) {
   const insets = useSafeAreaInsets();
+  const { isCompact, gutter } = useLayout();
+  const titleVariant = back || isCompact ? "displayM" : "displayL";
   return (
     <LinearGradient
       colors={gradients.hero}
       start={{ x: 0, y: 0 }}
       end={{ x: 1, y: 1 }}
-      style={[styles.hero, { paddingTop: insets.top + spacing.md, paddingBottom: spacing.xxl + overlap }]}
+      style={[styles.hero, { paddingTop: insets.top + spacing.md, paddingBottom: spacing.xxl + overlap, paddingHorizontal: gutter }]}
     >
       <SignalArt />
+      {/* mesma largura útil do corpo da tela (Container) para os conteúdos ficarem alinhados */}
+      <View style={[styles.inner, { maxWidth: contentMaxWidth - 2 * gutter }]}>
       <View style={styles.topRow}>
         {back ? (
           <Pressable
@@ -60,7 +65,7 @@ export function Hero({ title, eyebrow, subtitle, right, back, children, overlap 
               {eyebrow}
             </AppText>
           ) : null}
-          <AppText variant={back ? "displayM" : "displayL"} color={colors.textOnBrand} numberOfLines={2}>
+          <AppText variant={titleVariant} color={colors.textOnBrand} numberOfLines={2}>
             {title}
           </AppText>
         </View>
@@ -72,18 +77,19 @@ export function Hero({ title, eyebrow, subtitle, right, back, children, overlap 
         </AppText>
       ) : null}
       {children ? <View style={styles.content}>{children}</View> : null}
+      </View>
     </LinearGradient>
   );
 }
 
 const styles = StyleSheet.create({
   hero: {
-    paddingHorizontal: spacing.xl,
     borderBottomLeftRadius: radii.xl,
     borderBottomRightRadius: radii.xl,
     overflow: "hidden"
   },
   art: { position: "absolute", right: -20, top: 0 },
+  inner: { width: "100%", alignSelf: "center" },
   topRow: { flexDirection: "row", alignItems: "center", gap: spacing.md },
   back: {
     width: 40,

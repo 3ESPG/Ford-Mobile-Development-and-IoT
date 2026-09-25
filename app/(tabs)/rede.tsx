@@ -22,6 +22,8 @@ import { compactNumber, normalize, number, percent, titleCase } from "@/domain/f
 import { priorityLabel } from "@/domain/leads";
 import type { Dealer } from "@/domain/types";
 import { useApp } from "@/state/AppProvider";
+import { useAuth } from "@/state/AuthProvider";
+import { AccessDenied } from "@/ui/AccessDenied";
 import { ProfileButton } from "@/ui/ProfileButton";
 
 type Sort = "volume" | "share" | "leads";
@@ -29,11 +31,12 @@ type Sort = "volume" | "share" | "leads";
 const PLAYBOOK_ICONS = ["alert-circle-outline", "repeat-outline", "phone-portrait-outline", "speedometer-outline"];
 
 export default function RedeScreen() {
-  const { snapshot, settings } = useApp();
+  const { snapshot } = useApp();
+  const { user, can } = useAuth();
   const [tab, setTab] = useState<"lojas" | "playbook">("lojas");
   const [query, setQuery] = useState("");
   const [sort, setSort] = useState<Sort>("volume");
-  const myDealer = settings.profile?.dealerCode;
+  const myDealer = user?.dealerCode;
 
   const dealers = useMemo(() => {
     const q = normalize(query);
@@ -47,6 +50,8 @@ export default function RedeScreen() {
   }, [snapshot.dealers, query, sort]);
 
   const networkShare = snapshot.overview.serviceShare;
+
+  if (!can("network.view")) return <AccessDenied title="Rede Ford" />;
 
   return (
     <Screen

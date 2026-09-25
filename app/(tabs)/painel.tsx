@@ -9,6 +9,7 @@ import {
   Button,
   Card,
   colors,
+  EmptyState,
   IconTile,
   KpiGrid,
   KpiTile,
@@ -17,26 +18,46 @@ import {
   RingGauge,
   Screen,
   Section,
-  spacing
+  spacing,
+  useLayout
 } from "@/design-system";
+import { riskByAge } from "@/domain/customers";
 import { compactNumber, longDate, monthLabel, number, percent, shortDate, titleCase } from "@/domain/format";
-import { LEAD_STATUS, STATUS_ORDER } from "@/domain/leads";
+import { LEAD_STATUS, sortQueue, STATUS_ORDER } from "@/domain/leads";
 import { serviceLabel } from "@/domain/schedule";
+import { ROLE_INFO } from "@/domain/auth";
 import { useApp } from "@/state/AppProvider";
+import { useAuth } from "@/state/AuthProvider";
 import { conversionRate, funnelCounts, useScopedLeads } from "@/state/selectors";
+import { LeadCard } from "@/ui/LeadCard";
 import { ProfileButton } from "@/ui/ProfileButton";
 
 export default function PainelScreen() {
-  const { snapshot, settings, source, syncing, sync, crm } = useApp();
-  const { items, label } = useScopedLeads("mine");
+  const { snapshot, source, syncing, sync, crm } = useApp();
+  const { user, can } = useAuth();
+  const { isCompact } = useLayout();
+  const { items, label, dealer: dealerCode } = useScopedLeads();
   const { overview, meta } = snapshot;
-  const firstName = settings.profile?.name.split(" ")[0] || "";
+  const firstName = user?.name.split(" ")[0] || "";
+  const full = can("dashboard.full");
+  const dealer = dealerCode ? snapshot.dealers.find((d) => d.dealerCode === dealerCode) : undefined;
 
   const counts = useMemo(() => funnelCounts(items), [items]);
   const conversion = conversionRate(counts);
-  const openAlerts = crm.alerts.filter((a) => !a.acknowledged);
+  const openLeads = counts.novo + counts.contatado;
+  const openAlerts = crm.alerts.filter((a) => !a.acknowledged && (!dealerCode || items.some((l) => l.id === a.leadId)));
   const today = new Date().toISOString().slice(0, 10);
-  const nextAppointments = crm.appointments.filter((a) => a.status === "confirmado" && a.date >= today).slice(0, 2);
+  const nextAppointments = crm.appointments.filter((a) => a.status === "confirmado" && a.date >= today && (!dealerCode || a.dealerCode === dealerCode)).slice(0, 2);
+  const nextLeads = useMemo(() => sortQueue(items.filter((l) => l.status === "novo" || l.status === "contatado")).slice(0, 3), [items]);
+
+  // Service Share: da loja (gestor/consultor) ou da rede (admin)
+  const share = dealer ? dealer.serviceShare : overview.serviceShare;
+  const shareText = dealer
+    ? `${number(dealer.activeLast12)} de ${number(dealer.uniqueVins)} VINs da loja voltaram à rede oficial.`
+    : `${number(overview.activeLast12Vins)} de ${number(overview.eligibleVins)} VINs voltaram à rede oficial.`;
+  const shareDelta = dealer ? dealer.serviceShare - overview.serviceShare : null;
+  const atRisk = dealer ? dealer.openLeads : overview.leadCount;
+  const ageBars = riskByAge(items, meta.analysisDate).map((b) => ({ ...b, highlight: b.key !== "0-3" && b.value > 0, muted: b.key === "0-3" }));
 
   // Últimos 12 meses completos (o mês corrente da base é parcial e fica de fora)
   const lastMonth = meta.analysisDate.slice(0, 7);
@@ -46,27 +67,36 @@ export default function PainelScreen() {
 
   return (
     <Screen
-      eyebrow={`Olá, ${firstName} · ${settings.profile?.role === "gestor" ? "Gestor Ford" : label}`}
-      title="Painel de retenção"
+      eyebrow={`Olá, ${firstName} · ${user ? ROLE_INFO[user.role].label : ""}`}
+      title={full ? "Painel de retenção" : "Meu dia"}
       heroRight={<ProfileButton />}
       refreshing={syncing}
       onRefresh={sync}
       heroContent={
         <View style={styles.heroCard}>
-          <RingGauge value={overview.serviceShare} size={112} stroke={11} color={colors.textOnBrand} track="rgba(255,255,255,0.16)">
+          <RingGauge value={share} size={isCompact ? 84 : 112} stroke={isCompact ? 9 : 11} color={colors.textOnBrand} track="rgba(255,255,255,0.16)">
             <AppText variant="metric" color={colors.textOnBrand}>
-              {percent(overview.serviceShare, 0)}
+              {percent(share, 0)}
             </AppText>
           </RingGauge>
           <View style={styles.heroCopy}>
             <AppText variant="overline" color={colors.textOnBrandMuted}>
-              Service Share · 12 meses
+              Service Share · {label} · 12 meses
             </AppText>
             <AppText variant="bodySm" color={colors.textOnBrand}>
-              {number(overview.activeLast12Vins)} de {number(overview.eligibleVins)} VINs voltaram à rede oficial.
+              {shareText}
             </AppText>
             <View style={styles.heroBadges}>
-              <Badge label={`${percent(overview.quarterOrderDelta)} OS no trimestre`} tone="danger" solid icon="trending-down" />
+              {shareDelta !== null ? (
+                <Badge
+                  label={`${shareDelta >= 0 ? "+" : ""}${shareDelta.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} p.p. vs rede`}
+                  tone={shareDelta >= 0 ? "success" : "danger"}
+                  solid
+                  icon={shareDelta >= 0 ? "trending-up" : "trending-down"}
+                />
+              ) : (
+                <Badge label={`${percent(overview.quarterOrderDelta)} OS no trimestre`} tone="danger" solid icon="trending-down" />
+              )}
               <Badge label={source === "api" ? "API ao vivo" : "Base embarcada"} tone={source === "api" ? "success" : "neutral"} icon={source === "api" ? "cloud-done-outline" : "phone-portrait-outline"} />
             </View>
           </View>
@@ -83,6 +113,19 @@ export default function PainelScreen() {
           />
         </Card>
       ) : null}
+
+      <Section title="Indicadores-chave" subtitle={full ? `${label} · risco, leads e conversão` : "Sua fila de hoje"}>
+        <KpiGrid>
+          {full ? (
+            <KpiTile icon="warning-outline" label="Clientes em risco" value={compactNumber(atRisk)} detail="VINs com risco de evasão na base" tone="danger" onPress={() => router.push("/clientes")} />
+          ) : (
+            <KpiTile icon="shield-checkmark-outline" label="Retidos" value={String(counts.retido)} detail="voltaram para a rede" tone="success" />
+          )}
+          <KpiTile icon="flash-outline" label="Leads abertos" value={String(openLeads)} detail={`de ${items.length} na carteira`} tone="warning" onPress={() => router.push("/leads")} />
+          <KpiTile icon="calendar-outline" label="Agendados" value={String(counts.agendado)} detail="serviços marcados" tone="info" onPress={() => router.push("/agenda")} />
+          <KpiTile icon="trending-up-outline" label="Taxa de conversão" value={`${conversion}%`} detail="contatos que viraram agendamento" tone="success" />
+        </KpiGrid>
+      </Section>
 
       <Section title="Sua carteira" subtitle={`${label} · ${items.length} leads qualificados`} actionLabel="Ver fila" onAction={() => router.push("/leads")}>
         <Card>
@@ -109,6 +152,25 @@ export default function PainelScreen() {
         </Card>
       </Section>
 
+      {!full ? (
+        <Section title="Próximos leads" subtitle="Maior risco primeiro" actionLabel="Ver todos" onAction={() => router.push("/leads")}>
+          {nextLeads.length ? (
+            nextLeads.map((l) => <LeadCard key={l.id} lead={l} />)
+          ) : (
+            <EmptyState icon="checkmark-done-outline" title="Fila zerada" message="Todos os leads da sua loja já foram trabalhados." />
+          )}
+        </Section>
+      ) : (
+        <Section title="Clientes em risco por idade do veículo" subtitle="O Service Share cai a partir de 4 anos de uso: foco nas barras destacadas">
+          <Card>
+            {items.length ? <BarChart data={ageBars} /> : <EmptyState title="Sem leads na carteira" />}
+            <AppText variant="caption" color={colors.textMuted}>
+              Idade = ano da análise − ano-modelo · {items.length} leads de {label}
+            </AppText>
+          </Card>
+        </Section>
+      )}
+
       {nextAppointments.length ? (
         <Section title="Próximos agendamentos" actionLabel="Agenda" onAction={() => router.push("/agenda")}>
           <Card padded={false}>
@@ -127,6 +189,8 @@ export default function PainelScreen() {
         </Section>
       ) : null}
 
+      {full ? (
+        <>
       <Section title="Indicadores da rede" subtitle={`Base até ${shortDate(meta.analysisDate)}`}>
         <KpiGrid>
           <KpiTile icon="car-sport-outline" label="Base elegível" value={compactNumber(overview.eligibleVins)} detail="VINs únicos observados" tone="accent" />
@@ -188,6 +252,9 @@ export default function PainelScreen() {
           </Card>
         ))}
       </Section>
+
+        </>
+      ) : null}
 
       <AppText variant="caption" color={colors.textMuted} align="center">
         Fonte: {meta.source} · {shortDate(meta.dateRange.start)} a {shortDate(meta.dateRange.end)}

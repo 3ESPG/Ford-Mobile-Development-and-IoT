@@ -21,3 +21,6 @@ expo-env.d.ts
 *.aab
 .env
 .env.local
+
+# macOS
+.DS_Store
