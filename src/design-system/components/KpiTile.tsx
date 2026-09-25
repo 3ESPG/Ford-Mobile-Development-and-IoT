@@ -1,4 +1,5 @@
 import { StyleSheet, View } from "react-native";
+import { useLayout } from "../layout";
 import { colors, spacing, type Tone } from "../tokens";
 import { AppText } from "./AppText";
 import { Card } from "./Card";
@@ -14,8 +15,9 @@ type KpiTileProps = {
 };
 
 export function KpiTile({ icon, label, value, detail, tone = "accent", onPress }: KpiTileProps) {
+  const { columns } = useLayout();
   return (
-    <Card onPress={onPress} style={styles.tile} accessibilityLabel={`${label}: ${value}`}>
+    <Card onPress={onPress} style={[styles.tile, { flexBasis: columns === 4 ? "22%" : "47%" }]} accessibilityLabel={`${label}: ${value}`}>
       <View style={styles.top}>
         <IconTile name={icon} tone={tone} size="sm" />
         <AppText variant="caption" color={colors.textMuted} style={styles.label} numberOfLines={2}>

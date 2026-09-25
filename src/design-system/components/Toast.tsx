@@ -74,8 +74,11 @@ export function useToast() {
 }
 
 const styles = StyleSheet.create({
-  wrap: { position: "absolute", left: spacing.lg, right: spacing.lg, zIndex: 100 },
+  // faixa de largura total que centraliza o toast; em telas largas ele não passa de 520 px
+  wrap: { position: "absolute", left: spacing.lg, right: spacing.lg, zIndex: 100, alignItems: "center" },
   toast: {
+    width: "100%",
+    maxWidth: 520,
     backgroundColor: colors.surface,
     borderRadius: radii.md,
     padding: spacing.md,

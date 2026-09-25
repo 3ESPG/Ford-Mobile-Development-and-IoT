@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { RefreshControl, ScrollView, StyleSheet, View } from "react-native";
+import { Container } from "../layout";
 import { colors, spacing } from "../tokens";
 import { Hero } from "./Hero";
 
@@ -29,7 +30,7 @@ export function Screen({ title, eyebrow, subtitle, heroRight, heroContent, back,
         <Hero title={title} eyebrow={eyebrow} subtitle={subtitle} right={heroRight} back={back}>
           {heroContent}
         </Hero>
-        <View style={styles.body}>{children}</View>
+        <Container style={styles.body}>{children}</Container>
       </ScrollView>
       {footer}
     </View>
@@ -38,11 +39,11 @@ export function Screen({ title, eyebrow, subtitle, heroRight, heroContent, back,
 
 /** Conteúdo com padding padrão — útil em FlatList (ListHeaderComponent) */
 export function ScreenBody({ children }: { children: ReactNode }) {
-  return <View style={styles.body}>{children}</View>;
+  return <Container style={styles.body}>{children}</Container>;
 }
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.background },
   scroll: { paddingBottom: 120 },
-  body: { paddingHorizontal: spacing.lg, paddingTop: spacing.xl, gap: spacing.xxl }
+  body: { paddingTop: spacing.xl, gap: spacing.xxl }
 });
