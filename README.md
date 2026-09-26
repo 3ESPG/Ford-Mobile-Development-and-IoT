@@ -222,7 +222,7 @@ Para apontar o APK para uma API publicada, defina a URL no build: `EXPO_PUBLIC_A
 
 ## 6. ▶️ Vídeo de demonstração
 
-**👉 `COLE_AQUI_O_LINK_DO_YOUTUBE`** (não listado, até 2 minutos, gravado no celular com o APK)
+**👉 `(https://youtu.be/Gjh2fjB-2M0)`**
 
 Roteiro sugerido (~2 min): login como **gestor** → painel (share loja × rede, KPIs, idade do veículo) → **Clientes** → filtro **Esquecido** → cliente 360° → **Criar lembrete "em 1 minuto"** → lead de **Abandono** → WhatsApp → **Agendar** com observação → **Agenda** "Cliente compareceu" → notificação chegando → aba **IoT** "Simular falha" (vibração) → logout e login como **consultor** (painel resumido, sem aba Rede).
 
